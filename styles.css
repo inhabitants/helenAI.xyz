@@ -1,0 +1,169 @@
+/* Configurações gerais */
+body {
+    font-family: 'August BOLD', sans-serif;
+    color: black;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    position: relative;
+}
+
+/* Camada branca semi-transparente */
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.3); /* Branco suave */
+    z-index: -1;
+}
+
+/* Fundo do vídeo e imagem */
+.background-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -2;
+}
+
+.background-video {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Ajusta o vídeo sem distorção */
+}
+
+.background-image {
+    display: none;
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Ajusta a imagem sem distorção */
+}
+
+@media (max-width: 768px) {
+    .background-video {
+        display: none;
+    }
+    .background-image {
+        display: block;
+    }
+}
+
+/* Botão "Entrar" no canto superior direito */
+#enter-button {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background: #f4b642; /* Cor mais clara */
+    color: white;
+    padding: 10px 25px;
+    text-decoration: none;
+    font-family: 'Roboto', sans-serif; /* Fonte igual ao resto */
+    border-radius: 10px; /* Bordas mais suaves */
+    font-size: 1.2rem;
+    font-weight: bold;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra leve */
+    border: 2px solid transparent; /* Sem borda visível por padrão */
+    transition: all 0.3s ease;
+    z-index: 10;
+}
+
+#enter-button:hover {
+    background: #ffc75f; /* Cor de destaque no hover */
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.2); /* Sombra mais forte no hover */
+    transform: scale(1.05); /* Leve aumento no hover */
+}
+
+#enter-button:active {
+    background: #f3a737; /* Cor mais intensa ao clicar */
+    transform: scale(0.95); /* Leve redução ao clicar */
+}
+
+/* Efeito do ícone de construção no botão */
+#enter-button::before {
+    content: '🛠️'; /* Ícone de ferramenta */
+    position: absolute;
+    left: 2px; /* Posiciona o ícone dentro do botão */
+    bottom: 25%; /* Centraliza verticalmente */
+    transform: translateY(50%);
+    font-size: 1.05rem; /* Tamanho do ícone ajustado */
+    opacity: 0; /* Escondido por padrão */
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+#enter-button:active::before {
+    opacity: 1; /* Mostra o ícone */
+    transform: translateY(50%) rotate(10deg); /* Gira levemente o ícone */
+}
+
+/* Links na lateral esquerda */
+.side-links {
+    position: fixed;
+    top: 50%;
+    left: 20px; /* Mantém os links próximos à borda esquerda */
+    transform: translateY(-50%); /* Centraliza os links verticalmente */
+    display: flex;
+    flex-direction: column; /* Organiza os itens verticalmente */
+    gap: 30px; /* Espaço maior entre os links */
+    z-index: 10;
+}
+
+.side-link {
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    transition: transform 0.3s ease;
+}
+
+.side-link:hover {
+    transform: scale(1.1); /* Leve aumento ao passar o mouse */
+}
+
+/* Ícones uniformes */
+.icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 4rem; /* Define largura fixa */
+    height: 4rem; /* Define altura fixa */
+    font-size: 3rem; /* Ajusta o tamanho do ícone para igualar ao Discord */
+    text-align: center;
+    line-height: 4rem; /* Centraliza o texto verticalmente */
+}
+
+.icon-image {
+    width: 4rem; /* Largura igual ao ícone de texto */
+    height: 4rem; /* Altura igual ao ícone de texto */
+    display: inline-block;
+    object-fit: contain; /* Ajusta o tamanho da imagem sem distorcer */
+    vertical-align: middle;
+}
+
+
+/* Seção do herói */
+#hero {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh; /* Garante que o contêiner ocupe toda a altura da tela */
+    display: flex;
+    align-items: center; /* Centraliza verticalmente */
+    justify-content: center; /* Centraliza horizontalmente */
+    text-align: center;
+    overflow: hidden; /* Evita que a imagem extrapole a área visível */
+}
+
+/* Imagem do herói */
+.hero-image {
+    width: 95%; /* Garante que a imagem ocupe 95% da largura da tela */
+    height: 95%; /* Garante que a imagem ocupe 95% da altura da tela */
+    object-fit: cover; /* Mantém a proporção */
+    opacity: 0.7; /* Adiciona transparência */
+    transition: all 0.3s ease; /* Facilita ajustes com uma transição suave */
+    transform: translate(-5%, 10%);
+}
