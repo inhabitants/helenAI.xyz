@@ -62,16 +62,22 @@ body::before {
     color: white;
     padding: 10px 25px;
     text-decoration: none;
-    font-family: 'Roboto', sans-serif; /* Fonte igual ao resto */
+    font-family: 'August BOLD', sans-serif; /* Fonte igual ao resto */
     border-radius: 10px; /* Bordas mais suaves */
     font-size: 1.2rem;
     font-weight: bold;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra leve */
     border: 2px solid transparent; /* Sem borda visível por padrão */
+    display: inline-flex; /* Usa flexbox para alinhar ícone e texto */
+    align-items: center; /* Centraliza verticalmente */
+    justify-content: center; /* Centraliza horizontalmente */
+    gap: 5px; /* Espaço entre o ícone e o texto */
     transition: all 0.3s ease;
     z-index: 10;
+    height: 25px; /* Define altura consistente para o botão */
 }
 
+/* Hover e efeito */
 #enter-button:hover {
     background: #ffc75f; /* Cor de destaque no hover */
     box-shadow: 0 6px 10px rgba(0, 0, 0, 0.2); /* Sombra mais forte no hover */
@@ -79,26 +85,37 @@ body::before {
 }
 
 #enter-button:active {
-    background: #f3a737; /* Cor mais intensa ao clicar */
-    transform: scale(0.95); /* Leve redução ao clicar */
+    background: red; /* Muda a cor para vermelho ao clicar */
+    animation: bounce 0.5s ease; /* Animação de bounce */
 }
 
-/* Efeito do ícone de construção no botão */
+/* Ícone fixo à esquerda */
 #enter-button::before {
     content: '🛠️'; /* Ícone de ferramenta */
-    position: absolute;
-    left: 2px; /* Posiciona o ícone dentro do botão */
-    bottom: 25%; /* Centraliza verticalmente */
-    transform: translateY(50%);
-    font-size: 1.05rem; /* Tamanho do ícone ajustado */
-    opacity: 0; /* Escondido por padrão */
-    transition: opacity 0.3s ease, transform 0.3s ease;
+    font-size: 1.rem; /* Tamanho do ícone ajustado */
+    display: inline-block;
+    vertical-align: middle; /* Alinha o ícone com o texto */
 }
 
-#enter-button:active::before {
-    opacity: 1; /* Mostra o ícone */
-    transform: translateY(50%) rotate(10deg); /* Gira levemente o ícone */
+/* Animação de bounce */
+@keyframes bounce {
+    0% {
+        transform: translateX(0);
+    }
+    25% {
+        transform: translateX(-10px);
+    }
+    50% {
+        transform: translateX(10px);
+    }
+    75% {
+        transform: translateX(-5px);
+    }
+    100% {
+        transform: translateX(0);
+    }
 }
+
 
 /* Links na lateral esquerda */
 .side-links {
@@ -128,42 +145,46 @@ body::before {
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 4rem; /* Define largura fixa */
-    height: 4rem; /* Define altura fixa */
-    font-size: 3rem; /* Ajusta o tamanho do ícone para igualar ao Discord */
+    width: 6rem; /* Define largura fixa */
+    height: 6rem; /* Define altura fixa */
+    font-size: 4rem; /* Ajusta o tamanho do ícone para igualar ao Discord */
     text-align: center;
-    line-height: 4rem; /* Centraliza o texto verticalmente */
+    line-height: 6rem; /* Centraliza o texto verticalmente */
 }
 
 .icon-image {
-    width: 4rem; /* Largura igual ao ícone de texto */
-    height: 4rem; /* Altura igual ao ícone de texto */
+    width: 6rem; /* Largura igual ao ícone de texto */
+    height: 6rem; /* Altura igual ao ícone de texto */
     display: inline-block;
     object-fit: contain; /* Ajusta o tamanho da imagem sem distorcer */
     vertical-align: middle;
 }
 
-
 /* Seção do herói */
 #hero {
-    position: absolute;
+    position: fixed;
     top: 0;
     left: 0;
-    width: 100%;
+    width: 100vw; /* Garante que o contêiner ocupe toda a largura da tela */
     height: 100vh; /* Garante que o contêiner ocupe toda a altura da tela */
     display: flex;
     align-items: center; /* Centraliza verticalmente */
     justify-content: center; /* Centraliza horizontalmente */
-    text-align: center;
-    overflow: hidden; /* Evita que a imagem extrapole a área visível */
+    overflow: hidden; /* Evita barras de rolagem */
+    z-index: -1; /* Mantém a imagem em segundo plano */
 }
 
 /* Imagem do herói */
 .hero-image {
-    width: 95%; /* Garante que a imagem ocupe 95% da largura da tela */
-    height: 95%; /* Garante que a imagem ocupe 95% da altura da tela */
-    object-fit: cover; /* Mantém a proporção */
+    position: absolute;
+    top: 60%; /* Centraliza verticalmente */
+    left: 50%; /* Centraliza horizontalmente */
+    transform: translate(-50%, -50%); /* Garante que a imagem esteja perfeitamente centralizada */
+    width: 150%; /* Ajusta automaticamente a largura */
+    height: 105%; /* Ajusta automaticamente a altura */
+    max-width: 120vw; /* Faz a imagem ficar maior que a largura da tela */
+    max-height: 120vh; /* Faz a imagem ficar maior que a altura da tela */
+    object-fit: contain; /* Garante que a imagem inteira seja exibida sem cortar */
     opacity: 0.7; /* Adiciona transparência */
-    transition: all 0.3s ease; /* Facilita ajustes com uma transição suave */
-    transform: translate(-5%, 10%);
+    transition: all 0.3s ease; /* Transição suave para ajustes */
 }
