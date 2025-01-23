@@ -6,33 +6,48 @@
     <title>HelenAI</title>
     <link rel="stylesheet" href="styles.css">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@700&display=swap" rel="stylesheet">
+    <script>
+        // Redireciona para a versão mobile se estiver em um dispositivo móvel
+        document.addEventListener("DOMContentLoaded", () => {
+            const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+            if (isMobile) {
+                window.location.href = "mobile.html"; // Substitua pelo caminho da versão mobile
+            }
+        });
+    </script>
 </head>
 <body>
-<div class="background-container">
-    <!-- Vídeo para PCs -->
-    <video autoplay muted loop class="background-video">
-        <source src="assets/helen-video.mp4" type="video/mp4">
-        Seu navegador não suporta vídeos HTML5.
-    </video>
+    <!-- Contêiner de fundo -->
+    <div class="background-container">
+        <!-- Vídeo para PCs -->
+        <video autoplay muted loop class="background-video">
+            <source src="assets/helen-video.mp4" type="video/mp4">
+            Seu navegador não suporta vídeos HTML5.
+        </video>
 
-    <!-- Imagem estática para dispositivos móveis -->
-    <img src="assets/background.png" alt="Background estático" class="background-image">
-</div>
+        <!-- Imagem estática para dispositivos móveis -->
+        <img src="assets/helen_m.png" alt="Background estático móvel" class="background-image">
+    </div>
 
-<!-- Botão no canto superior direito -->
-<a href="#get-started" class="cta" id="enter-button">Entrar</a>
+    <!-- Botão no canto superior direito -->
+    <a href="#get-started" class="cta" id="enter-button">Entrar</a>
 
-<!-- Links na lateral esquerda -->
-<nav class="side-links">
-    <a href="https://pbrasil.gitbook.io/HelenAI" class="side-link" title="Docs" target="_blank"><i class="icon">📄</i></a>
-    <a href="https://discord.gg/pMWaSH4W9b" class="side-link" title="Discord" target="_blank"><img src="assets/discord.png" alt="Discord" class="icon-image"></a>
-</nav>
+    <!-- Links na lateral esquerda -->
+    <nav class="side-links">
+        <a href="https://pbrasil.gitbook.io/HelenAI" class="side-link" title="Docs" target="_blank">
+            <i class="icon">📄</i>
+        </a>
+        <a href="https://discord.gg/pMWaSH4W9b" class="side-link" title="Discord" target="_blank">
+            <img src="assets/discord.png" alt="Discord" class="icon-image">
+        </a>
+    </nav>
 
-<main>
-    <section id="hero">
-        <img src="assets/helenai.png" alt="HelenAI" class="hero-image">
-    </section>
-</main>
-
+    <!-- Seção do herói -->
+    <main>
+        <section id="hero">
+            <!-- Imagem principal do desktop substituída no mobile via CSS -->
+            <img src="assets/helenai.png" alt="HelenAI" class="hero-image">
+        </section>
+    </main>
 </body>
 </html>
