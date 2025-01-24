@@ -213,7 +213,7 @@ body::before {
 
     #enter-button {
         top: 10px; /* Ajusta a posição do botão no topo */
-        right: 130px; /* Ajusta a posição do botão na lateral */
+        right: 150px; /* Ajusta a posição do botão na lateral */
         padding: 5px 15px; /* Botão menor */
         font-size: 1rem; /* Texto menor */
         height: auto; /* Altura ajustável */
@@ -228,7 +228,7 @@ body::before {
         transform: translateX(-50%); /* Centraliza os links horizontalmente */
         display: flex;
         flex-direction: row; /* Alinha os ícones horizontalmente */
-        gap: 230px; /* Menor espaçamento entre os ícones */
+        gap: 250px; /* Menor espaçamento entre os ícones */
         z-index: 10; /* Certifica-se de que os links fiquem sobre outros elementos */
     }
     
