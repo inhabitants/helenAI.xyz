@@ -212,13 +212,27 @@ body::before {
     }
 
     #enter-button {
-        top: 10px; /* Ajusta a posição do botão no topo */
-        right: 140px; /* Ajusta a posição do botão na lateral */
-        padding: 5px 15px; /* Botão menor */
-        font-size: 1rem; /* Texto menor */
-        height: auto; /* Altura ajustável */
-        border-radius: 8px; /* Borda levemente arredondada */
+        position: fixed;
+        top: 10px; /* Próximo ao topo */
+        left: 50%; /* Centraliza horizontalmente */
+        transform: translateX(-50%); /* Alinha perfeitamente no centro */
+        background: #f4b642;
+        color: white;
+        padding: 5px 15px; /* Espaçamento interno menor */
+        text-decoration: none;
+        font-family: 'August BOLD', sans-serif;
+        border-radius: 8px; /* Bordas arredondadas */
+        font-size: 1rem; /* Tamanho menor do texto */
+        font-weight: bold;
+        z-index: 10;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        max-width: 85px; /* Limita a largura máxima */
+        width: auto; /* Permite ajuste dinâmico */
+        transition: all 0.3s ease;
     }
+    
 
     .side-links {
         position: fixed;
