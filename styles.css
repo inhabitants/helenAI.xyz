@@ -213,7 +213,7 @@ body::before {
 
     #enter-button {
         top: 10px; /* Ajusta a posição do botão no topo */
-        right: 150px; /* Ajusta a posição do botão na lateral */
+        right: 140px; /* Ajusta a posição do botão na lateral */
         padding: 5px 15px; /* Botão menor */
         font-size: 1rem; /* Texto menor */
         height: auto; /* Altura ajustável */
