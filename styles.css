@@ -145,16 +145,16 @@ body::before {
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 6rem; /* Define largura fixa */
-    height: 6rem; /* Define altura fixa */
-    font-size: 4rem; /* Ajusta o tamanho do ícone para igualar ao Discord */
+    width: 5rem; /* Define largura fixa */
+    height: 5rem; /* Define altura fixa */
+    font-size: 3rem; /* Ajusta o tamanho do ícone para igualar ao Discord */
     text-align: center;
-    line-height: 6rem; /* Centraliza o texto verticalmente */
+    line-height: 5rem; /* Centraliza o texto verticalmente */
 }
 
 .icon-image {
-    width: 6rem; /* Largura igual ao ícone de texto */
-    height: 6rem; /* Altura igual ao ícone de texto */
+    width: 4rem; /* Largura igual ao ícone de texto */
+    height: 4rem; /* Altura igual ao ícone de texto */
     display: inline-block;
     object-fit: contain; /* Ajusta o tamanho da imagem sem distorcer */
     vertical-align: middle;
@@ -242,7 +242,7 @@ body::before {
         transform: translateX(-50%); /* Centraliza os links horizontalmente */
         display: flex;
         flex-direction: row; /* Alinha os ícones horizontalmente */
-        gap: 250px; /* Menor espaçamento entre os ícones */
+        gap: 32px; /* Menor espaçamento entre os ícones */
         z-index: 10; /* Certifica-se de que os links fiquem sobre outros elementos */
     }
     
@@ -251,9 +251,9 @@ body::before {
     }
 
     .icon, .icon-image {
-        width: 2.7rem; /* Reduzido em 40% (6rem * 0.6) */
-        height: 2.7rem;
-        font-size: 1.7rem; /* Ajuste proporcional ao ícone de texto */
+        width: 2.2rem; /* Reduzido em 40% (6rem * 0.6) */
+        height: 2.2rem;
+        font-size: 1.8rem; /* Ajuste proporcional ao ícone de texto */
     }
 
     body::before {
