@@ -7,6 +7,10 @@
     <link rel="stylesheet" href="styles.css">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@700&display=swap" rel="stylesheet">
     <script src="scripts.js" defer></script>
+    <!-- Adicionar React e ThirdWeb -->
+    <script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/@thirdweb-dev/sdk/dist/thirdweb-sdk.umd.min.js"></script>
 </head>
 <body>
     <!-- Contêiner de fundo -->
@@ -21,8 +25,8 @@
         <img src="assets/helen_m.png" alt="Background estático móvel" class="background-image">
     </div>
 
-    <!-- Botão no canto superior direito -->
-    <a href="" class="cta" id="enter-button">Entrar</a>
+    <!-- Substituir o link por um div para o botão do ThirdWeb -->
+    <div id="wallet-connect-button" class="cta"></div>
 
     <!-- Links na lateral esquerda -->
     <nav class="side-links">
