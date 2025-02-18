@@ -2,14 +2,10 @@ import { ThirdwebProvider, ConnectWallet } from "@thirdweb-dev/react";
 import React from 'react';
 import { createRoot } from 'react-dom/client';
 
-if (!process.env.THIRDWEB_CLIENT_ID) {
-  throw new Error('THIRDWEB_CLIENT_ID não está configurado nas variáveis de ambiente');
-}
-
-function WalletConnectButton() {
+function App() {
   return (
     <ThirdwebProvider 
-      clientId={process.env.THIRDWEB_CLIENT_ID}
+      clientId="3076cba3ba05f39fceaa810ce8a45596"
       activeChain="ethereum"
     >
       <ConnectWallet
@@ -22,5 +18,9 @@ function WalletConnectButton() {
 }
 
 const container = document.getElementById('wallet-connect-button');
-const root = createRoot(container);
-root.render(<WalletConnectButton />); 
+if (container) {
+  const root = createRoot(container);
+  root.render(<App />);
+} else {
+  console.error("Elemento 'wallet-connect-button' não encontrado");
+} 
