@@ -1,6 +1,6 @@
 import React from 'react';
 import { createRoot } from 'react-dom/client';
-import App from './wallet-connect';
+import App from './wallet-connect.jsx';
 
 const container = document.getElementById('wallet-connect-button');
 if (container) {

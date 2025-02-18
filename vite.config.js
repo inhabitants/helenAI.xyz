@@ -7,11 +7,13 @@ export default defineConfig({
     global: 'globalThis',
   },
   resolve: {
-    extensions: ['.js', '.jsx']
+    extensions: ['.mjs', '.js', '.jsx', '.json', '.ts', '.tsx']
   },
-  esbuild: {
-    loader: 'jsx',
-    include: /\.[jt]sx?$/,
-    exclude: []
+  build: {
+    rollupOptions: {
+      input: {
+        main: '/index.html'
+      }
+    }
   }
 }) 
