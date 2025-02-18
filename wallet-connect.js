@@ -1,5 +1,6 @@
-import { createThirdwebClient } from "thirdweb";
-import { ConnectButton } from "thirdweb/react";
+import { createThirdwebClient, ConnectButton } from "@thirdweb-dev/react";
+import React from 'react';
+import { createRoot } from 'react-dom/client';
 import { inAppWallet } from "thirdweb/wallets";
 
 if (!process.env.THIRDWEB_CLIENT_ID) {
@@ -31,6 +32,7 @@ function WalletConnectButton() {
   );
 }
 
-// Renderizar o componente no elemento
+// Atualizar para usar createRoot (React 18)
 const container = document.getElementById('wallet-connect-button');
-ReactDOM.render(<WalletConnectButton />, container); 
+const root = createRoot(container);
+root.render(<WalletConnectButton />); 
