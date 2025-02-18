@@ -5,5 +5,13 @@ export default defineConfig({
   plugins: [react()],
   define: {
     global: 'globalThis',
+  },
+  resolve: {
+    extensions: ['.js', '.jsx']
+  },
+  esbuild: {
+    loader: 'jsx',
+    include: /\.[jt]sx?$/,
+    exclude: []
   }
 }) 
