@@ -1,10 +1,16 @@
 import { ThirdwebProvider, ConnectWallet } from "@thirdweb-dev/react";
 import React from 'react';
 
+const clientId = import.meta.env.VITE_THIRDWEB_CLIENT_ID;
+
+if (!clientId) {
+  throw new Error('VITE_THIRDWEB_CLIENT_ID não está configurado nas variáveis de ambiente');
+}
+
 export default function App() {
   return (
     <ThirdwebProvider 
-      clientId="3076cba3ba05f39fceaa810ce8a45596"
+      clientId={clientId}
       activeChain="ethereum"
     >
       <ConnectWallet
