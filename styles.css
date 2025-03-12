@@ -260,3 +260,24 @@ body::before {
         background: rgba(255, 255, 255, 0.3); /* Mantém a camada branca */
     }
 }
+
+.powered-by {
+    position: fixed;
+    bottom: 10px;
+    right: 10px;
+    color: white;
+    font-size: 14px;
+    font-family: 'Roboto', sans-serif;
+    z-index: 100;
+}
+
+.powered-by a {
+    color: #a0a0ff;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.powered-by a:hover {
+    color: #ffffff;
+    text-decoration: underline;
+}
