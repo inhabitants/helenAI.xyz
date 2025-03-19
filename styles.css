@@ -58,7 +58,7 @@ body::before {
     position: fixed;
     top: 20px;
     right: 20px;
-    background: #f4b642; /* Cor mais clara */
+    background: #0057ff; /* Cor do Behance */
     color: white;
     padding: 10px 25px;
     text-decoration: none;
@@ -79,19 +79,19 @@ body::before {
 
 /* Hover e efeito */
 #enter-button:hover {
-    background: #ffc75f; /* Cor de destaque no hover */
+    background: #003ecb; /* Cor de destaque no hover */
     box-shadow: 0 6px 10px rgba(0, 0, 0, 0.2); /* Sombra mais forte no hover */
     transform: scale(1.05); /* Leve aumento no hover */
 }
 
 #enter-button:active {
-    background: red; /* Muda a cor para vermelho ao clicar */
+    background: #0057ff; /* Mantém a cor do Behance ao clicar */
     animation: bounce 0.5s ease; /* Animação de bounce */
 }
 
 /* Ícone fixo à esquerda */
 #enter-button::before {
-    content: '🛠️'; /* Ícone de ferramenta */
+    content: '🎨'; /* Ícone de paleta de cores */
     font-size: 1.rem; /* Tamanho do ícone ajustado */
     display: inline-block;
     vertical-align: middle; /* Alinha o ícone com o texto */
@@ -216,7 +216,7 @@ body::before {
         top: 10px; /* Próximo ao topo */
         left: 50%; /* Centraliza horizontalmente */
         transform: translateX(-50%); /* Alinha perfeitamente no centro */
-        background: #f4b642;
+        background: #0057ff; /* Cor do Behance */
         color: white;
         padding: 5px 15px; /* Espaçamento interno menor */
         text-decoration: none;
@@ -228,7 +228,7 @@ body::before {
         display: flex;
         align-items: center;
         justify-content: center;
-        max-width: 85px; /* Limita a largura máxima */
+        max-width: 120px; /* Aumenta a largura máxima para caber "Portfólio" */
         width: auto; /* Permite ajuste dinâmico */
         transition: all 0.3s ease;
     }
