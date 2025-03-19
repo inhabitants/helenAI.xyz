@@ -281,3 +281,13 @@ body::before {
     color: #ffffff;
     text-decoration: underline;
 }
+
+/* Ajuste do powered-by para dispositivos móveis */
+@media (max-width: 768px) {
+    .powered-by {
+        bottom: auto;
+        top: 50px; /* Posiciona abaixo do botão de portfólio */
+        right: 10px;
+        font-size: 12px; /* Texto um pouco menor */
+    }
+}
