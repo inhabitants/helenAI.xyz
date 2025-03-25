@@ -57,7 +57,7 @@ body::before {
 #enter-button {
     position: fixed;
     top: 20px;
-    right: 20px;
+    right: 160px; /* Movido para a esquerda para dar espaço ao botão My Comic */
     background: #0057ff; /* Cor do Behance */
     color: white;
     padding: 10px 25px;
@@ -295,8 +295,8 @@ body::before {
 /* Botão "My Comic" lúdico */
 #comic-button {
     position: fixed;
-    bottom: 20px;
-    left: 20px;
+    top: 20px;
+    right: 20px; /* Posicionado no canto superior direito */
     background: linear-gradient(45deg, #ff5b8f, #ff8e6e); /* Gradiente lúdico e colorido */
     color: white;
     padding: 10px 25px;
@@ -372,7 +372,7 @@ body::before {
 .spotify-player {
     position: fixed;
     bottom: 20px;
-    left: 140px; /* Posicionado à direita do botão My Comic */
+    left: 20px; /* Posicionado no canto inferior esquerdo */
     z-index: 10;
     display: flex;
     align-items: center;
@@ -385,13 +385,15 @@ body::before {
 }
 
 .spotify-player:hover {
-    transform: scale(1.05);
+    transform: scale(1.02);
     box-shadow: 0 6px 15px rgba(0, 0, 0, 0.4);
 }
 
 .spotify-player iframe {
     border-radius: 8px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    width: 300px; /* Largura aumentada para mostrar o título e controles */
+    height: 80px; /* Altura suficiente para os controles */
 }
 
 .spotify-link {
@@ -412,23 +414,33 @@ body::before {
 
 /* Ajustes responsivos para dispositivos móveis */
 @media (max-width: 768px) {
-    #comic-button {
-        bottom: 70px;
-        left: 10px;
+    #enter-button {
+        top: 10px;
+        left: 10px; /* Posicionado no canto superior esquerdo */
+        right: auto; /* Remove o posicionamento à direita */
+        transform: none; /* Remove a transformação */
         font-size: 0.9rem;
         padding: 6px 15px;
         height: 20px;
     }
+
+    #comic-button {
+        top: 10px;
+        right: 10px; /* Mantém no canto superior direito */
+        font-size: 0.9rem;
+        padding: 6px 15px;
+        height: 20px;
+        animation: none; /* Remove a animação em dispositivos móveis */
+    }
     
     .spotify-player {
-        bottom: 70px;
-        left: 120px;
-        transform: scale(0.8);
+        bottom: 10px;
+        left: 10px;
         transform-origin: bottom left;
     }
     
     .spotify-player iframe {
-        width: 70px;
-        height: 70px;
+        width: 220px; /* Reduz a largura em telas menores */
+        height: 80px;
     }
 }
