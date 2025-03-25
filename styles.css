@@ -420,31 +420,42 @@ body::before {
         animation: none; /* Remove a animação em dispositivos móveis */
     }
     
-    /* Player do Spotify - Versão Mobile (com configurações específicas) */
+    /* Player do Spotify - Versão Mobile (reposicionado para parte superior) */
     .spotify-player {
-        bottom: 65px; /* Posicionado acima dos links sociais */
+        top: 50px; /* Abaixo dos botões no topo */
+        bottom: auto; /* Remove posicionamento inferior */
         left: 50%; /* Centralizado */
         transform: translateX(-50%); /* Centralizado */
         width: 300px; /* Largura ligeiramente menor que no desktop */
-        background-color: transparent !important; /* Forçando transparência total */
-        backdrop-filter: blur(0px); /* Removendo completamente o blur */
-        box-shadow: none; /* Sem sombra no mobile para maior transparência */
-        border-radius: 0; /* Sem bordas arredondadas */
-        border: none; /* Sem bordas */
-        opacity: 0.7; /* Aplicando opacidade geral ao container */
+        background-color: transparent !important; 
+        backdrop-filter: blur(0px);
+        box-shadow: none;
+        border-radius: 0;
+        border: none;
+        opacity: 0.7;
     }
     
     .spotify-player:hover {
         transform: translateX(-50%); /* Mantém centralizado sem efeito de escala no hover para mobile */
-        background-color: transparent !important; /* Mantém transparência total mesmo no hover */
+        background-color: transparent !important;
     }
     
     .spotify-player iframe {
         width: 300px;
         height: 84px;
-        border-radius: 0; /* Removendo bordas arredondadas */
-        box-shadow: none; /* Removendo sombras */
-        background: transparent !important; /* Tentando forçar transparência no iframe */
-        opacity: 0.7; /* Aplicando opacidade ao iframe */
+        border-radius: 0;
+        box-shadow: none;
+        background: transparent !important;
+        opacity: 0.7;
+    }
+    
+    /* Powered by reposicionado para onde estava o player */
+    .powered-by {
+        bottom: 65px; /* Mesma posição onde estava o player */
+        left: 50%; 
+        right: auto; /* Remove posicionamento à direita */
+        transform: translateX(-50%); /* Centraliza */
+        text-align: center; /* Centraliza o texto */
+        width: auto; /* Permite que o texto se ajuste naturalmente */
     }
 }
