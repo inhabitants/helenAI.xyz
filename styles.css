@@ -243,7 +243,7 @@ body::before {
         display: flex;
         flex-direction: row; /* Alinha os ícones horizontalmente */
         gap: 32px; /* Menor espaçamento entre os ícones */
-        z-index: 10; /* Certifica-se de que os links fiquem sobre outros elementos */
+        z-index: 9998; /* Menor que o player (9999) mas ainda alto */
     }
     
     .side-link {
@@ -420,12 +420,14 @@ body::before {
     }
     
     .spotify-player {
-        bottom: 10px;
+        bottom: 65px; /* Aumentado para ficar acima dos links sociais */
         left: 10px;
+        transform: scale(0.85); /* Ligeiramente reduzido em tamanho */
+        transform-origin: bottom left; /* Mantém o ponto de origem no canto inferior esquerdo */
+        width: 280px; /* Ligeiramente menor no mobile */
     }
     
     .spotify-player iframe {
-        width: 220px; /* Reduz a largura em telas menores */
-        height: 80px;
+        width: 280px;
     }
 }
