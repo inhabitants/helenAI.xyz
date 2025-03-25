@@ -57,7 +57,7 @@ body::before {
 #enter-button {
     position: fixed;
     top: 20px;
-    right: 180px; /* Aumentado o espaçamento */
+    right: 240px; /* Aumentado significativamente o espaçamento */
     background: #0057ff; /* Cor do Behance */
     color: white;
     padding: 10px 20px; /* Reduzido ligeiramente o padding horizontal */
@@ -392,9 +392,9 @@ body::before {
 @media (max-width: 768px) {
     #enter-button {
         top: 10px;
-        right: 50%; /* Centralizado à direita */
-        left: auto; /* Remove o posicionamento à esquerda */
-        transform: translateX(-10px); /* Deslocado para a esquerda */
+        left: 10px; /* Posicionado no canto superior esquerdo */
+        right: auto; /* Remove o posicionamento à direita */
+        transform: none; /* Remove a transformação */
         font-size: 0.9rem;
         padding: 6px 15px;
         height: 20px;
