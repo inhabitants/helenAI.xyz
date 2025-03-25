@@ -368,7 +368,7 @@ body::before {
     }
 }
 
-/* Player do Spotify */
+/* Player do Spotify - Versão Desktop */
 .spotify-player {
     position: fixed;
     bottom: 20px;
@@ -384,6 +384,7 @@ body::before {
     overflow: hidden;
     backdrop-filter: blur(5px); /* efeito vítreo mais leve */
     transition: transform 0.3s ease, background-color 0.3s ease;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2); /* sombra sutil apenas no desktop */
 }
 
 .spotify-player:hover {
@@ -419,14 +420,26 @@ body::before {
         animation: none; /* Remove a animação em dispositivos móveis */
     }
     
+    /* Player do Spotify - Versão Mobile (com configurações específicas) */
     .spotify-player {
-        bottom: 65px; /* Aumentado para ficar acima dos links sociais */
-        left: 50%; /* Centraliza horizontalmente */
-        transform: translateX(-50%); /* Centraliza em relação ao ponto médio da tela */
-        width: 300px; /* Aumentado de 280px para 300px */
+        bottom: 65px; /* Posicionado acima dos links sociais */
+        left: 50%; /* Centralizado */
+        transform: translateX(-50%); /* Centralizado */
+        width: 300px; /* Largura ligeiramente menor que no desktop */
+        background-color: rgba(25, 20, 20, 0.05); /* Transparência muito alta (apenas 5% de opacidade) */
+        backdrop-filter: blur(2px); /* Blur bem mais leve no mobile */
+        box-shadow: none; /* Sem sombra no mobile para maior transparência */
+        border-radius: 8px; /* Bordas menos arredondadas no mobile */
+    }
+    
+    .spotify-player:hover {
+        transform: translateX(-50%); /* Mantém centralizado sem efeito de escala no hover para mobile */
+        background-color: rgba(25, 20, 20, 0.05); /* Mantém a alta transparência mesmo no hover */
     }
     
     .spotify-player iframe {
-        width: 300px; /* Ajusta o iframe para a nova largura */
+        width: 300px;
+        height: 84px;
+        border-radius: 5px; /* Bordas do iframe menos arredondadas */
     }
 }
