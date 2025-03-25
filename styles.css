@@ -379,15 +379,20 @@ body::before {
     justify-content: center;
     width: 320px;
     height: 84px;
+    background-color: rgba(25, 20, 20, 0.2); /* fundo levemente transparente */
     border-radius: 12px;
     overflow: hidden;
-    backdrop-filter: blur(10px); /* efeito vítreo se disponível */
+    backdrop-filter: blur(5px); /* efeito vítreo mais leve */
     transition: transform 0.3s ease, opacity 0.3s ease;
-  }
+}
+
+.spotify-player:hover {
+    transform: scale(1.02);
+    background-color: rgba(25, 20, 20, 0.3); /* ligeiramente mais opaco no hover */
+}
 
 .spotify-player iframe {
     border-radius: 8px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
     width: 320px; /* Largura aumentada para mostrar o título e controles */
     height: 84px; /* Altura suficiente para os controles */
 }
