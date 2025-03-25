@@ -426,20 +426,25 @@ body::before {
         left: 50%; /* Centralizado */
         transform: translateX(-50%); /* Centralizado */
         width: 300px; /* Largura ligeiramente menor que no desktop */
-        background-color: rgba(25, 20, 20, 0.05); /* Transparência muito alta (apenas 5% de opacidade) */
-        backdrop-filter: blur(2px); /* Blur bem mais leve no mobile */
+        background-color: transparent !important; /* Forçando transparência total */
+        backdrop-filter: blur(0px); /* Removendo completamente o blur */
         box-shadow: none; /* Sem sombra no mobile para maior transparência */
-        border-radius: 8px; /* Bordas menos arredondadas no mobile */
+        border-radius: 0; /* Sem bordas arredondadas */
+        border: none; /* Sem bordas */
+        opacity: 0.7; /* Aplicando opacidade geral ao container */
     }
     
     .spotify-player:hover {
         transform: translateX(-50%); /* Mantém centralizado sem efeito de escala no hover para mobile */
-        background-color: rgba(25, 20, 20, 0.05); /* Mantém a alta transparência mesmo no hover */
+        background-color: transparent !important; /* Mantém transparência total mesmo no hover */
     }
     
     .spotify-player iframe {
         width: 300px;
         height: 84px;
-        border-radius: 5px; /* Bordas do iframe menos arredondadas */
+        border-radius: 0; /* Removendo bordas arredondadas */
+        box-shadow: none; /* Removendo sombras */
+        background: transparent !important; /* Tentando forçar transparência no iframe */
+        opacity: 0.7; /* Aplicando opacidade ao iframe */
     }
 }
