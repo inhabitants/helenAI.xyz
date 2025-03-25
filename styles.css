@@ -285,10 +285,13 @@ body::before {
 /* Ajuste do powered-by para dispositivos móveis */
 @media (max-width: 768px) {
     .powered-by {
-        bottom: auto;
-        top: 50px; /* Posiciona abaixo do botão de portfólio */
-        right: 10px;
-        font-size: 12px; /* Texto um pouco menor */
+        bottom: 45px; /* Posicionado acima dos links sociais (que estão em bottom: 5px) */
+        left: 50%; 
+        right: auto; /* Remove posicionamento à direita */
+        transform: translateX(-50%); /* Centraliza */
+        text-align: center; /* Centraliza o texto */
+        width: auto; /* Permite que o texto se ajuste naturalmente */
+        font-size: 12px; /* Texto ligeiramente menor no mobile */
     }
 }
 
@@ -449,13 +452,5 @@ body::before {
         opacity: 0.7;
     }
     
-    /* Powered by reposicionado para onde estava o player */
-    .powered-by {
-        bottom: 65px; /* Mesma posição onde estava o player */
-        left: 50%; 
-        right: auto; /* Remove posicionamento à direita */
-        transform: translateX(-50%); /* Centraliza */
-        text-align: center; /* Centraliza o texto */
-        width: auto; /* Permite que o texto se ajuste naturalmente */
-    }
+    /* Powered by foi movido para uma media query específica acima */
 }
