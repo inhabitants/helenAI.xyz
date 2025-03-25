@@ -390,8 +390,8 @@ body::before {
 .spotify-player iframe {
     border-radius: 8px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-    width: 300px; /* Largura aumentada para mostrar o título e controles */
-    height: 80px; /* Altura suficiente para os controles */
+    width: 320px; /* Largura aumentada para mostrar o título e controles */
+    height: 84px; /* Altura suficiente para os controles */
 }
 
 /* Ajustes responsivos para dispositivos móveis */
