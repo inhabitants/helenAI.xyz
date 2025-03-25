@@ -378,7 +378,7 @@ body::before {
     align-items: center;
     gap: 10px;
     background: rgba(25, 20, 20, 0.7); /* Fundo semi-transparente escuro */
-    padding: 5px;
+    padding: 10px;
     border-radius: 10px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
     transition: all 0.3s ease;
@@ -396,20 +396,34 @@ body::before {
     height: 80px; /* Altura suficiente para os controles */
 }
 
-.spotify-link {
-    display: flex;
-    align-items: center;
-    justify-content: center;
+/* Dica de play */
+.play-hint {
+    color: #1DB954; /* Cor verde do Spotify */
+    font-family: 'Roboto', sans-serif;
+    font-size: 14px;
+    font-weight: bold;
+    background: rgba(0, 0, 0, 0.6);
+    padding: 5px 10px;
+    border-radius: 20px;
+    white-space: nowrap;
+    animation: pulse 2s infinite; /* Animação pulsante para chamar atenção */
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
 }
 
-.spotify-icon {
-    width: 24px;
-    height: 24px;
-    transition: transform 0.3s ease;
-}
-
-.spotify-icon:hover {
-    transform: scale(1.2);
+/* Animação pulse para a dica de play */
+@keyframes pulse {
+    0% {
+        opacity: 0.7;
+        transform: scale(1);
+    }
+    50% {
+        opacity: 1;
+        transform: scale(1.05);
+    }
+    100% {
+        opacity: 0.7;
+        transform: scale(1);
+    }
 }
 
 /* Ajustes responsivos para dispositivos móveis */
@@ -437,10 +451,16 @@ body::before {
         bottom: 10px;
         left: 10px;
         transform-origin: bottom left;
+        padding: 5px;
     }
     
     .spotify-player iframe {
         width: 220px; /* Reduz a largura em telas menores */
         height: 80px;
+    }
+    
+    .play-hint {
+        font-size: 12px;
+        padding: 3px 8px;
     }
 }
