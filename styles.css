@@ -372,14 +372,20 @@ body::before {
 .spotify-player {
     position: fixed;
     bottom: 20px;
-    left: 20px; /* Posicionado no canto inferior esquerdo */
-    z-index: 10;
+    left: 20px;
+    z-index: 9999;
     display: flex;
     align-items: center;
-    background: transparent; /* Fundo transparente para mostrar apenas o embed */
-    border-radius: 10px;
-    transition: all 0.3s ease;
-}
+    justify-content: center;
+    width: 320px;
+    height: 84px;
+    background-color: rgba(25, 20, 20, 0.8); /* leve background para visibilidade */
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(10px); /* efeito vítreo se disponível */
+    transition: transform 0.3s ease, opacity 0.3s ease;
+  }
 
 .spotify-player iframe {
     border-radius: 8px;
