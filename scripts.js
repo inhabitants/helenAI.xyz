@@ -14,7 +14,7 @@ document.addEventListener('DOMContentLoaded', function() {
   // Criar e adicionar o indicador de carregamento
   const loadingIndicator = document.createElement('div');
   loadingIndicator.className = 'loading-indicator';
-  loadingIndicator.textContent = 'Carregando vídeo';
+  loadingIndicator.textContent = 'Carregando';
   document.body.appendChild(loadingIndicator);
   
   // Esconder o vídeo até que esteja pronto
@@ -50,7 +50,7 @@ document.addEventListener('DOMContentLoaded', function() {
   // Função para carregar o vídeo longo
   function loadLongVideo() {
     // Atualizar texto do indicador de carregamento
-    loadingIndicator.textContent = 'Carregando vídeo em alta qualidade';
+    loadingIndicator.textContent = 'Carregando HD';
     
     videoSource.src = longVideoPath;
     videoElement.load();
