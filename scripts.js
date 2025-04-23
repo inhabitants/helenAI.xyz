@@ -11,6 +11,12 @@ document.addEventListener('DOMContentLoaded', function() {
   staticBackground.style.cssText = 'position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; z-index: 1;';
   backgroundContainer.appendChild(staticBackground);
   
+  // Criar e adicionar o indicador de carregamento
+  const loadingIndicator = document.createElement('div');
+  loadingIndicator.className = 'loading-indicator';
+  loadingIndicator.textContent = 'Carregando vídeo';
+  document.body.appendChild(loadingIndicator);
+  
   // Esconder o vídeo até que esteja pronto
   videoElement.style.display = 'none';
   
@@ -32,8 +38,20 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   }
   
+  // Função para remover o indicador de carregamento com animação
+  function removeLoadingIndicator() {
+    loadingIndicator.style.transition = 'opacity 0.5s ease';
+    loadingIndicator.style.opacity = '0';
+    setTimeout(() => {
+      loadingIndicator.remove();
+    }, 500);
+  }
+  
   // Função para carregar o vídeo longo
   function loadLongVideo() {
+    // Atualizar texto do indicador de carregamento
+    loadingIndicator.textContent = 'Carregando vídeo em alta qualidade';
+    
     videoSource.src = longVideoPath;
     videoElement.load();
     
@@ -42,6 +60,9 @@ document.addEventListener('DOMContentLoaded', function() {
       // Mostrar o vídeo
       videoElement.style.display = 'block';
       videoElement.play();
+      
+      // Remover o indicador de carregamento
+      removeLoadingIndicator();
       
       // Remover a imagem estática com fade out
       staticBackground.style.transition = 'opacity 1s ease';
@@ -65,6 +86,9 @@ document.addEventListener('DOMContentLoaded', function() {
         // Mostrar o vídeo
         videoElement.style.display = 'block';
         videoElement.play();
+        
+        // Remover o indicador de carregamento
+        removeLoadingIndicator();
         
         // Remover a imagem estática com fade out
         staticBackground.style.transition = 'opacity 1s ease';
