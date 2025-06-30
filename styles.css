@@ -371,6 +371,47 @@ body::before {
     }
 }
 
+/* Botão Chat com Helen */
+#chat-button {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: #ff4081;
+    color: white;
+    padding: 12px 18px;
+    text-decoration: none;
+    font-family: 'August BOLD', sans-serif;
+    border-radius: 20px;
+    font-size: 1.2rem;
+    font-weight: bold;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    transition: all 0.3s ease;
+    z-index: 9999;
+    height: 30px;
+}
+
+#chat-button:hover {
+    background: #e91e63;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+    transform: scale(1.05);
+}
+
+#chat-button:active {
+    animation: pulse 0.5s ease;
+}
+
+#chat-button::before {
+    content: '💬';
+    font-size: 1rem;
+    display: inline-block;
+    vertical-align: middle;
+    margin-right: 5px;
+}
+
 /* Player do Spotify - Versão Desktop */
 .spotify-player {
     position: fixed;
@@ -423,6 +464,16 @@ body::before {
         animation: none; /* Remove a animação em dispositivos móveis */
     }
     
+    /* Botão Chat com Helen - Mobile */
+    #chat-button {
+        position: fixed;
+        top: 10px;
+        right: 75px; /* Posicionado próximo ao botão My Comic */
+        font-size: 0.9rem;
+        padding: 6px 15px;
+        height: 20px;
+    }
+
     /* Player do Spotify - Versão Mobile (reposicionado para parte superior) */
     .spotify-player {
         top: 50px; /* Abaixo dos botões no topo */
