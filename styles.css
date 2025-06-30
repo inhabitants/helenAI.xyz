@@ -476,6 +476,9 @@ body::before {
         padding: 6px 15px;
         height: 20px;
     }
+    #chat-button:active {
+        animation: none !important;
+    }
 
     /* Player do Spotify - Versão Mobile (reposicionado para parte superior) */
     .spotify-player {
