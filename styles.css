@@ -374,7 +374,7 @@ body::before {
 /* Botão Chat com Helen */
 #chat-button {
     position: fixed;
-    bottom: 20px;
+    bottom: 60px;
     right: 20px;
     background: #ff4081;
     color: white;
@@ -467,8 +467,11 @@ body::before {
     /* Botão Chat com Helen - Mobile */
     #chat-button {
         position: fixed;
-        top: 10px;
-        right: 75px; /* Posicionado próximo ao botão My Comic */
+        bottom: 85px; /* Posicionado acima do powered-by */
+        left: 50%;
+        transform: translateX(-50%);
+        top: auto;
+        right: auto;
         font-size: 0.9rem;
         padding: 6px 15px;
         height: 20px;
