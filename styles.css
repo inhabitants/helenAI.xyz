@@ -200,7 +200,7 @@ body::before {
     }
 
     .hero-image {
-        content: url("assets/helenai_m.png"); /* Substitui pela imagem móvel */
+        content: url("/assets/helenai_m.png"); /* Substitui pela imagem móvel */
         width: 80%; /* Reduzido em 15% */
         height: auto;
         max-width: 100%;
