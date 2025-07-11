@@ -1,0 +1,568 @@
+/* Configurações gerais */
+body {
+    font-family: 'August BOLD', sans-serif;
+    color: black;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    position: relative;
+}
+
+/* Camada branca semi-transparente */
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.3); /* Branco suave */
+    z-index: -1;
+}
+
+/* Fundo do vídeo e imagem */
+.background-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -2;
+}
+
+.background-video {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Ajusta o vídeo sem distorção */
+}
+
+.background-image {
+    display: none;
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Ajusta a imagem sem distorção */
+}
+
+@media (max-width: 768px) {
+    .background-video {
+        display: none;
+    }
+    .background-image {
+        display: block;
+    }
+}
+
+/* Botão "Entrar" no canto superior direito */
+#enter-button {
+    position: fixed;
+    top: 20px;
+    right: 240px; /* Aumentado significativamente o espaçamento */
+    background: #0057ff; /* Cor do Behance */
+    color: white;
+    padding: 10px 20px; /* Reduzido ligeiramente o padding horizontal */
+    text-decoration: none;
+    font-family: 'August BOLD', sans-serif; /* Fonte igual ao resto */
+    border-radius: 10px; /* Bordas mais suaves */
+    font-size: 1.2rem;
+    font-weight: bold;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra leve */
+    border: 2px solid transparent; /* Sem borda visível por padrão */
+    display: inline-flex; /* Usa flexbox para alinhar ícone e texto */
+    align-items: center; /* Centraliza verticalmente */
+    justify-content: center; /* Centraliza horizontalmente */
+    gap: 5px; /* Espaço entre o ícone e o texto */
+    transition: all 0.3s ease;
+    z-index: 10;
+    height: 25px; /* Define altura consistente para o botão */
+}
+
+/* Hover e efeito */
+#enter-button:hover {
+    background: #003ecb; /* Cor de destaque no hover */
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.2); /* Sombra mais forte no hover */
+    transform: scale(1.05); /* Leve aumento no hover */
+}
+
+#enter-button:active {
+    background: #0057ff; /* Mantém a cor do Behance ao clicar */
+    animation: bounce 0.5s ease; /* Animação de bounce */
+}
+
+/* Ícone fixo à esquerda */
+#enter-button::before {
+    content: '🎨'; /* Ícone de paleta de cores */
+    font-size: 1.rem; /* Tamanho do ícone ajustado */
+    display: inline-block;
+    vertical-align: middle; /* Alinha o ícone com o texto */
+}
+
+/* Animação de bounce */
+@keyframes bounce {
+    0% {
+        transform: translateX(0);
+    }
+    25% {
+        transform: translateX(-10px);
+    }
+    50% {
+        transform: translateX(10px);
+    }
+    75% {
+        transform: translateX(-5px);
+    }
+    100% {
+        transform: translateX(0);
+    }
+}
+
+
+/* Links na lateral esquerda */
+.side-links {
+    position: fixed;
+    top: 50%;
+    left: 20px; /* Mantém os links próximos à borda esquerda */
+    transform: translateY(-50%); /* Centraliza os links verticalmente */
+    display: flex;
+    flex-direction: column; /* Organiza os itens verticalmente */
+    gap: 30px; /* Espaço maior entre os links */
+    z-index: 10;
+}
+
+.side-link {
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    transition: transform 0.3s ease;
+}
+
+.side-link:hover {
+    transform: scale(1.1); /* Leve aumento ao passar o mouse */
+}
+
+/* Ícones uniformes */
+.icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 5rem; /* Define largura fixa */
+    height: 5rem; /* Define altura fixa */
+    font-size: 3rem; /* Ajusta o tamanho do ícone para igualar ao Discord */
+    text-align: center;
+    line-height: 5rem; /* Centraliza o texto verticalmente */
+}
+
+.icon-image {
+    width: 4rem; /* Largura igual ao ícone de texto */
+    height: 4rem; /* Altura igual ao ícone de texto */
+    display: inline-block;
+    object-fit: contain; /* Ajusta o tamanho da imagem sem distorcer */
+    vertical-align: middle;
+}
+
+/* Seção do herói */
+#hero {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw; /* Garante que o contêiner ocupe toda a largura da tela */
+    height: 100vh; /* Garante que o contêiner ocupe toda a altura da tela */
+    display: flex;
+    align-items: center; /* Centraliza verticalmente */
+    justify-content: center; /* Centraliza horizontalmente */
+    overflow: hidden; /* Evita barras de rolagem */
+    z-index: -1; /* Mantém a imagem em segundo plano */
+}
+
+/* Imagem do herói */
+.hero-image {
+    position: absolute;
+    top: 60%; /* Centraliza verticalmente */
+    left: 50%; /* Centraliza horizontalmente */
+    transform: translate(-50%, -50%); /* Garante que a imagem esteja perfeitamente centralizada */
+    width: 150%; /* Ajusta automaticamente a largura */
+    height: 105%; /* Ajusta automaticamente a altura */
+    max-width: 120vw; /* Faz a imagem ficar maior que a largura da tela */
+    max-height: 120vh; /* Faz a imagem ficar maior que a altura da tela */
+    object-fit: contain; /* Garante que a imagem inteira seja exibida sem cortar */
+    opacity: 0.7; /* Adiciona transparência */
+    transition: all 0.3s ease; /* Transição suave para ajustes */
+}
+/* Ajuste para dispositivos móveis */
+/* Ajuste para dispositivos móveis */
+@media (max-width: 768px) {
+    .background-video {
+        display: none; /* Oculta o vídeo no mobile */
+    }
+
+    .background-image {
+        display: block; /* Exibe a imagem no mobile */
+    }
+
+    .hero-image {
+        content: url("/assets/helenai_m.png"); /* Substitui pela imagem móvel */
+        width: 80%; /* Reduzido em 15% */
+        height: auto;
+        max-width: 100%;
+        max-height: 100%;
+        position: absolute;
+        top: 55%; /* Posicionado verticalmente */
+        left: 55%; /* Posicionado horizontalmente */
+        transform: translate(-50%, -50%);
+    }
+
+    #enter-button {
+        position: fixed;
+        top: 10px; /* Próximo ao topo */
+        left: 50%; /* Centraliza horizontalmente */
+        transform: translateX(-50%); /* Alinha perfeitamente no centro */
+        background: #0057ff; /* Cor do Behance */
+        color: white;
+        padding: 5px 15px; /* Espaçamento interno menor */
+        text-decoration: none;
+        font-family: 'August BOLD', sans-serif;
+        border-radius: 8px; /* Bordas arredondadas */
+        font-size: 1rem; /* Tamanho menor do texto */
+        font-weight: bold;
+        z-index: 10;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        max-width: 120px; /* Aumenta a largura máxima para caber "Portfólio" */
+        width: auto; /* Permite ajuste dinâmico */
+        transition: all 0.3s ease;
+    }
+    
+
+    .side-links {
+        position: fixed;
+        bottom: 5px; /* Mantém os links no canto inferior */
+        left: 50%; /* Centraliza horizontalmente */
+        top: auto; /* Remove o alinhamento vertical anterior */
+        transform: translateX(-50%); /* Centraliza os links horizontalmente */
+        display: flex;
+        flex-direction: row; /* Alinha os ícones horizontalmente */
+        gap: 32px; /* Menor espaçamento entre os ícones */
+        z-index: 9998; /* Menor que o player (9999) mas ainda alto */
+    }
+    
+    .side-link {
+        transform: none; /* Remove animação de escala */
+    }
+
+    .icon, .icon-image {
+        width: 2.2rem; /* Reduzido em 40% (6rem * 0.6) */
+        height: 2.2rem;
+        font-size: 1.8rem; /* Ajuste proporcional ao ícone de texto */
+    }
+
+    body::before {
+        background: rgba(255, 255, 255, 0.3); /* Mantém a camada branca */
+    }
+}
+
+.powered-by {
+    position: fixed;
+    bottom: 10px;
+    right: 10px;
+    color: white;
+    font-size: 14px;
+    font-family: 'Roboto', sans-serif;
+    z-index: 100;
+}
+
+.powered-by a {
+    color: #a0a0ff;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.powered-by a:hover {
+    color: #ffffff;
+    text-decoration: underline;
+}
+
+/* Ajuste do powered-by para dispositivos móveis */
+@media (max-width: 768px) {
+    .powered-by {
+        bottom: 45px; /* Posicionado acima dos links sociais (que estão em bottom: 5px) */
+        left: 50%; 
+        right: auto; /* Remove posicionamento à direita */
+        transform: translateX(-50%); /* Centraliza */
+        text-align: center; /* Centraliza o texto */
+        width: auto; /* Permite que o texto se ajuste naturalmente */
+        font-size: 12px; /* Texto ligeiramente menor no mobile */
+    }
+}
+
+/* Botão "My Comic" lúdico */
+#comic-button {
+    position: fixed;
+    top: 20px;
+    right: 20px; /* Posicionado no canto superior direito */
+    background: linear-gradient(45deg, #ff5b8f, #ff8e6e); /* Gradiente lúdico e colorido */
+    color: white;
+    padding: 10px 25px;
+    text-decoration: none;
+    font-family: 'August BOLD', sans-serif;
+    border-radius: 15px; /* Bordas mais arredondadas */
+    font-size: 1.2rem;
+    font-weight: bold;
+    box-shadow: 0 4px 10px rgba(255, 91, 143, 0.4); /* Sombra colorida */
+    border: 2px solid #ffcbe0; /* Borda suave */
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    transition: all 0.3s ease;
+    z-index: 10;
+    animation: float 3s ease-in-out infinite; /* Animação de flutuação */
+    height: 25px;
+}
+
+/* Hover e efeito para o botão My Comic */
+#comic-button:hover {
+    background: linear-gradient(45deg, #ff8e6e, #ff5b8f); /* Gradiente invertido no hover */
+    box-shadow: 0 6px 15px rgba(255, 91, 143, 0.6); /* Sombra mais forte no hover */
+    transform: scale(1.05) rotate(-2deg); /* Leve aumento e rotação no hover */
+}
+
+#comic-button:active {
+    animation: wobble 0.5s ease; /* Animação de wobble ao clicar */
+}
+
+/* Ícone para o botão My Comic */
+#comic-button::before {
+    content: '📚'; /* Ícone de livros/quadrinhos */
+    font-size: 1.2rem;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+/* Animação de flutuação */
+@keyframes float {
+    0% {
+        transform: translateY(0px);
+    }
+    50% {
+        transform: translateY(-10px);
+    }
+    100% {
+        transform: translateY(0px);
+    }
+}
+
+/* Animação wobble */
+@keyframes wobble {
+    0% {
+        transform: rotate(0);
+    }
+    25% {
+        transform: rotate(-5deg);
+    }
+    50% {
+        transform: rotate(5deg);
+    }
+    75% {
+        transform: rotate(-3deg);
+    }
+    100% {
+        transform: rotate(0);
+    }
+}
+
+/* Botão Chat com Helen */
+#chat-button {
+    position: fixed;
+    bottom: 60px;
+    right: 20px;
+    background: #ff4081;
+    color: white;
+    padding: 12px 18px;
+    text-decoration: none;
+    font-family: 'August BOLD', sans-serif;
+    border-radius: 20px;
+    font-size: 1.2rem;
+    font-weight: bold;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    transition: all 0.3s ease;
+    z-index: 9999;
+    height: 30px;
+}
+
+#chat-button:hover {
+    background: #e91e63;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+    transform: scale(1.05);
+}
+
+#chat-button:active {
+    animation: pulse 0.5s ease;
+}
+
+#chat-button::before {
+    content: '💬';
+    font-size: 1rem;
+    display: inline-block;
+    vertical-align: middle;
+    margin-right: 5px;
+}
+
+/* Player do Spotify - Versão Desktop */
+.spotify-player {
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 320px;
+    height: 84px;
+    background-color: rgba(25, 20, 20, 0.2); /* fundo levemente transparente */
+    border-radius: 12px;
+    overflow: hidden;
+    backdrop-filter: blur(5px); /* efeito vítreo mais leve */
+    transition: transform 0.3s ease, background-color 0.3s ease;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2); /* sombra sutil apenas no desktop */
+}
+
+.spotify-player:hover {
+    transform: scale(1.02);
+    background-color: rgba(25, 20, 20, 0.3); /* ligeiramente mais opaco no hover */
+    backdrop-filter: blur(5px); /* Manter o blur consistente */
+}
+
+.spotify-player iframe {
+    border-radius: 8px;
+    width: 320px; /* Largura aumentada para mostrar o título e controles */
+    height: 84px; /* Altura suficiente para os controles */
+}
+
+/* Ajustes responsivos para dispositivos móveis */
+@media (max-width: 768px) {
+    #enter-button {
+        top: 10px;
+        left: 10px; /* Posicionado no canto superior esquerdo */
+        right: auto; /* Remove o posicionamento à direita */
+        transform: none; /* Remove a transformação */
+        font-size: 0.9rem;
+        padding: 6px 15px;
+        height: 20px;
+    }
+
+    #comic-button {
+        top: 10px;
+        right: 10px; /* Mantém no canto direito */
+        font-size: 0.9rem;
+        padding: 6px 15px;
+        height: 20px;
+        animation: none; /* Remove a animação em dispositivos móveis */
+    }
+    
+    /* Botão Chat com Helen - Mobile */
+    #chat-button {
+        position: fixed;
+        bottom: 85px; /* Posicionado acima do powered-by */
+        left: 50%;
+        transform: translateX(-50%);
+        top: auto;
+        right: auto;
+        font-size: 0.9rem;
+        padding: 6px 15px;
+        height: 20px;
+    }
+    #chat-button:active {
+        animation: none !important;
+    }
+
+    /* Player do Spotify - Versão Mobile (reposicionado para parte superior) */
+    .spotify-player {
+        top: 50px; /* Abaixo dos botões no topo */
+        bottom: auto; /* Remove posicionamento inferior */
+        left: 50%; /* Centralizado */
+        transform: translateX(-50%); /* Centralizado */
+        width: 300px; /* Largura ligeiramente menor que no desktop */
+        background-color: transparent !important; 
+        backdrop-filter: blur(0px);
+        box-shadow: none;
+        border-radius: 0;
+        border: none;
+        opacity: 0.7;
+    }
+    
+    .spotify-player:hover {
+        transform: translateX(-50%); /* Mantém centralizado sem efeito de escala no hover para mobile */
+        background-color: transparent !important;
+    }
+    
+    .spotify-player iframe {
+        width: 300px;
+        height: 84px;
+        border-radius: 0;
+        box-shadow: none;
+        background: transparent !important;
+        opacity: 0.7;
+    }
+    
+    /* Powered by foi movido para uma media query específica acima */
+}
+
+/* Animação de carregamento */
+.loading-indicator {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+    border-radius: 20px;
+    padding: 8px 16px;
+    font-size: 12px;
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Roboto', sans-serif;
+    backdrop-filter: blur(3px);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    letter-spacing: 1px;
+}
+
+.loading-indicator::after {
+    content: '';
+    position: relative;
+    width: 6px;
+    height: 6px;
+    margin-left: 8px;
+    border-radius: 50%;
+    background-color: white;
+    animation: pulse 1.5s infinite ease-in-out;
+}
+
+@keyframes pulse {
+    0% {
+        transform: scale(0.3);
+        opacity: 0.2;
+    }
+    50% {
+        transform: scale(1);
+        opacity: 1;
+    }
+    100% {
+        transform: scale(0.3);
+        opacity: 0.2;
+    }
+}
+
+/* Ajuste para dispositivos móveis */
+@media (max-width: 768px) {
+    .loading-indicator {
+        bottom: 50px;
+        font-size: 10px;
+        padding: 6px 12px;
+    }
+}
