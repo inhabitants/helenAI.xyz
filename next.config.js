@@ -1,7 +1,6 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  // Exportação estática
-  output: 'export',
+  // Configurações padrão (SSR/SSG)
   // Desabilita otimização de imagens para exportação estática
   images: {
     unoptimized: true,
