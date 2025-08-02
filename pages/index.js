@@ -57,7 +57,7 @@ export default function Home() {
 
       <div className="spotify-player">
         <iframe
-          src="https://open.spotify.com/embed/album/2rIgJTXSOEt1fcC5pr7lWO?theme=0&autoplay=1"
+          src="https://open.spotify.com/embed/artist/1xSo2AuRA0I4xLuM0IRcnn?theme=0&autoplay=1"
           width="100%"
           height="380"
           frameBorder="0"
