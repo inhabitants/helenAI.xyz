@@ -57,13 +57,15 @@ export default function Home() {
 
       <div className="spotify-player">
         <iframe
-          src="https://open.spotify.com/embed/artist/1xSo2AuRA0I4xLuM0IRcnn?theme=0&autoplay=1"
+          style={{borderRadius: '12px'}}
+          src="https://open.spotify.com/embed/artist/1xSo2AuRA0I4xLuM0IRcnn?utm_source=generator&theme=0"
           width="100%"
-          height="380"
+          height="352"
           frameBorder="0"
+          allowFullScreen=""
           allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
           loading="lazy"
-          title="Spotify Player"
+          title="Spotify Embed: Helen AI"
         />
       </div>
 
