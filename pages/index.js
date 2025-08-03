@@ -16,7 +16,7 @@ export default function Home() {
 
       <div className="background-container">
         <video autoPlay muted loop className="background-video" id="background-video">
-          <source src="/assets/helen-video.mp4" type="video/mp4" id="video-source" />
+          <source src="/Helenfull.mp4" type="video/mp4" id="video-source" />
           Seu navegador não suporta vídeos HTML5.
         </video>
         <img src="/assets/helen_m.png" alt="Background estático móvel" className="background-image" />
