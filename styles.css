@@ -412,11 +412,11 @@ body::before {
     margin-right: 5px;
 }
 
-/* Botão de Volume para Vídeo de Background */
+/* Botão de Volume para Vídeo de Background - Apenas Desktop */
 .volume-button {
     position: fixed;
     top: 30px;
-    right: 30px;
+    left: 30px; /* Movido para canto superior esquerdo */
     z-index: 9999;
     width: 50px;
     height: 50px;
@@ -457,14 +457,10 @@ body::before {
     outline-offset: 2px;
 }
 
-/* Responsivo para mobile */
+/* Responsivo para mobile - Ocultar botão de volume */
 @media (max-width: 768px) {
     .volume-button {
-        top: 20px;
-        right: 20px;
-        width: 45px;
-        height: 45px;
-        font-size: 18px;
+        display: none; /* Oculto no mobile pois não há vídeo */
     }
 }
 
