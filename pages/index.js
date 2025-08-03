@@ -22,23 +22,30 @@ export default function Home() {
   const handleVideoLoadStart = () => {
     setIsVideoLoading(true)
     setLoadingProgress(0)
-  }
-
-  const handleVideoProgress = () => {
-    const video = document.getElementById('background-video')
-    if (video && video.buffered.length > 0) {
-      const bufferedEnd = video.buffered.end(video.buffered.length - 1)
-      const duration = video.duration
-      if (duration > 0) {
-        const progress = (bufferedEnd / duration) * 100
-        setLoadingProgress(progress)
-      }
-    }
+    
+    // Simular progresso de carregamento
+    const progressInterval = setInterval(() => {
+      setLoadingProgress(prev => {
+        if (prev >= 90) {
+          clearInterval(progressInterval)
+          return prev
+        }
+        return prev + Math.random() * 15
+      })
+    }, 200)
   }
 
   const handleVideoCanPlay = () => {
     setIsVideoLoading(false)
     setLoadingProgress(100)
+    
+    // Garantir que o vídeo toque
+    const video = document.getElementById('background-video')
+    if (video) {
+      video.play().catch(error => {
+        console.log('Autoplay prevented:', error)
+      })
+    }
   }
 
   return (
@@ -52,14 +59,13 @@ export default function Home() {
           autoPlay 
           muted 
           loop 
+          playsInline
           className="background-video" 
           id="background-video"
           onLoadStart={handleVideoLoadStart}
-          onProgress={handleVideoProgress}
           onCanPlay={handleVideoCanPlay}
-          onLoadedData={handleVideoCanPlay}
         >
-          <source src="/Helenfull.mp4" type="video/mp4" id="video-source" />
+          <source src="/assets/Helenfull.mp4" type="video/mp4" id="video-source" />
           Seu navegador não suporta vídeos HTML5.
         </video>
         <img src="/assets/helen_m.png" alt="Background estático móvel" className="background-image" />
