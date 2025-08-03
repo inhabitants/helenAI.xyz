@@ -412,32 +412,41 @@ body::before {
     margin-right: 5px;
 }
 
-/* Player do Spotify - Versão Desktop - Melhorado */
+/* Player do Spotify - Gaveta Expansível - Desktop */
 .spotify-player {
     position: fixed;
     bottom: 30px;
     left: 30px;
     z-index: 9999;
     display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 400px; /* Aumentado para mais espaço */
-    height: 470px; /* Altura aumentada para o álbum */
-    background: linear-gradient(135deg, rgba(30, 215, 96, 0.1), rgba(0, 0, 0, 0.3)); /* Gradiente com cores do Spotify */
-    border-radius: 16px; /* Bordas mais arredondadas */
+    flex-direction: column;
+    border-radius: 16px;
     overflow: hidden;
-    backdrop-filter: blur(10px); /* Efeito vítreo mais forte */
+    backdrop-filter: blur(10px);
     transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     box-shadow: 
         0 8px 32px rgba(0, 0, 0, 0.3),
         0 0 0 1px rgba(255, 255, 255, 0.1),
-        inset 0 1px 0 rgba(255, 255, 255, 0.1); /* Sombras e bordas mais sofisticadas */
-    padding: 15px; /* Espaçamento interno */
+        inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+/* Estado colapsado (gaveta fechada) */
+.spotify-player.collapsed {
+    width: 200px;
+    height: 60px;
+    background: linear-gradient(135deg, rgba(30, 215, 96, 0.1), rgba(0, 0, 0, 0.3));
+}
+
+/* Estado expandido (gaveta aberta) */
+.spotify-player.expanded {
+    width: 400px;
+    height: 470px;
+    background: linear-gradient(135deg, rgba(30, 215, 96, 0.1), rgba(0, 0, 0, 0.3));
+    padding: 15px;
 }
 
 .spotify-player:hover {
-    transform: scale(1.03) translateY(-5px); /* Efeito de elevação */
-    background: linear-gradient(135deg, rgba(30, 215, 96, 0.15), rgba(0, 0, 0, 0.4));
+    transform: scale(1.02) translateY(-3px);
     backdrop-filter: blur(15px);
     box-shadow: 
         0 12px 40px rgba(0, 0, 0, 0.4),
@@ -445,12 +454,79 @@ body::before {
         inset 0 1px 0 rgba(255, 255, 255, 0.2);
 }
 
-.spotify-player iframe {
-    border-radius: 12px;
-    width: 100%; /* Usa toda a largura disponível */
-    height: 100%; /* Usa toda a altura disponível */
+/* Botão de toggle */
+.spotify-toggle {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    height: 60px;
+    padding: 0 20px;
+    background: transparent;
     border: none;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2); /* Sombra no iframe */
+    color: white;
+    font-family: inherit;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    outline: none;
+}
+
+.spotify-toggle:hover {
+    background: rgba(30, 215, 96, 0.1);
+}
+
+.spotify-toggle:focus {
+    background: rgba(30, 215, 96, 0.15);
+    outline: 2px solid rgba(30, 215, 96, 0.5);
+    outline-offset: -2px;
+}
+
+.spotify-icon {
+    font-size: 20px;
+    margin-right: 10px;
+}
+
+.spotify-text {
+    flex: 1;
+    text-align: left;
+}
+
+.spotify-arrow {
+    font-size: 12px;
+    opacity: 0.7;
+    transition: transform 0.3s ease;
+}
+
+.spotify-player.expanded .spotify-arrow {
+    transform: rotate(180deg);
+}
+
+/* Conteúdo do player */
+.spotify-content {
+    flex: 1;
+    padding-top: 15px;
+    animation: fadeIn 0.3s ease-in-out;
+}
+
+.spotify-content iframe {
+    border-radius: 12px;
+    width: 100%;
+    height: 100%;
+    border: none;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 /* Ajustes responsivos para dispositivos móveis */
@@ -490,38 +566,61 @@ body::before {
         animation: none !important;
     }
 
-    /* Player do Spotify - Versão Mobile - Melhorado */
+    /* Player do Spotify - Gaveta Expansível - Mobile */
     .spotify-player {
-        top: 80px; /* Mais espaço do topo */
+        top: 80px;
         bottom: auto;
         left: 50%;
         transform: translateX(-50%);
-        width: calc(100vw - 40px); /* Largura responsiva com margem */
-        max-width: 350px; /* Largura máxima */
-        height: 400px; /* Altura maior para o álbum */
-        background: linear-gradient(135deg, rgba(30, 215, 96, 0.08), rgba(0, 0, 0, 0.2));
+        border-radius: 12px;
         backdrop-filter: blur(8px);
         box-shadow: 
             0 6px 25px rgba(0, 0, 0, 0.2),
             0 0 0 1px rgba(255, 255, 255, 0.05);
-        border-radius: 12px;
-        padding: 12px;
         opacity: 0.95;
         transition: all 0.3s ease;
     }
     
+    /* Estado colapsado - Mobile */
+    .spotify-player.collapsed {
+        width: 180px;
+        height: 50px;
+        background: linear-gradient(135deg, rgba(30, 215, 96, 0.08), rgba(0, 0, 0, 0.2));
+    }
+    
+    /* Estado expandido - Mobile */
+    .spotify-player.expanded {
+        width: calc(100vw - 40px);
+        max-width: 350px;
+        height: 420px;
+        background: linear-gradient(135deg, rgba(30, 215, 96, 0.08), rgba(0, 0, 0, 0.2));
+        padding: 12px;
+    }
+    
     .spotify-player:hover {
         transform: translateX(-50%) scale(1.01);
-        background: linear-gradient(135deg, rgba(30, 215, 96, 0.12), rgba(0, 0, 0, 0.25));
         opacity: 1;
     }
     
-    .spotify-player iframe {
-        width: 100%;
-        height: 100%;
+    /* Botão toggle - Mobile */
+    .spotify-toggle {
+        height: 50px;
+        padding: 0 15px;
+        font-size: 13px;
+    }
+    
+    .spotify-icon {
+        font-size: 18px;
+        margin-right: 8px;
+    }
+    
+    .spotify-content {
+        padding-top: 12px;
+    }
+    
+    .spotify-content iframe {
         border-radius: 8px;
         box-shadow: 0 2px 15px rgba(0, 0, 0, 0.15);
-        opacity: 1;
     }
     
     /* Powered by foi movido para uma media query específica acima */

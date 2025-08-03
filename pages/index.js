@@ -1,6 +1,13 @@
 import Head from 'next/head'
+import { useState } from 'react'
 
 export default function Home() {
+  const [isSpotifyExpanded, setIsSpotifyExpanded] = useState(false)
+
+  const toggleSpotify = () => {
+    setIsSpotifyExpanded(!isSpotifyExpanded)
+  }
+
   return (
     <>
       <Head>
@@ -55,18 +62,33 @@ export default function Home() {
         </section>
       </main>
 
-      <div className="spotify-player">
-        <iframe
-          style={{borderRadius: '12px'}}
-          src="https://open.spotify.com/embed/album/2rIgJTXSOEt1fcC5pr7lWO?utm_source=generator&theme=0"
-          width="100%"
-          height="450"
-          frameBorder="0"
-          allowFullScreen=""
-          allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
-          loading="lazy"
-          title="Spotify Embed: Helen AI"
-        />
+      <div className={`spotify-player ${isSpotifyExpanded ? 'expanded' : 'collapsed'}`}>
+        <button 
+          type="button"
+          className="spotify-toggle" 
+          onClick={toggleSpotify}
+          aria-label={isSpotifyExpanded ? 'Fechar player do Spotify' : 'Abrir player do Spotify'}
+        >
+          <div className="spotify-icon">🎵</div>
+          <span className="spotify-text">{isSpotifyExpanded ? 'Fechar' : 'Música'}</span>
+          <div className="spotify-arrow">{isSpotifyExpanded ? '▼' : '▲'}</div>
+        </button>
+        
+        {isSpotifyExpanded && (
+          <div className="spotify-content">
+            <iframe
+              style={{borderRadius: '12px'}}
+              src="https://open.spotify.com/embed/album/2rIgJTXSOEt1fcC5pr7lWO?utm_source=generator&theme=0"
+              width="100%"
+              height="400"
+              frameBorder="0"
+              allowFullScreen=""
+              allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+              loading="lazy"
+              title="Spotify Embed: Helen AI"
+            />
+          </div>
+        )}
       </div>
 
       <footer className="powered-by">
