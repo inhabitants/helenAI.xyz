@@ -412,6 +412,192 @@ body::before {
     margin-right: 5px;
 }
 
+/* Botão de Volume para Vídeo de Background */
+.volume-button {
+    position: fixed;
+    top: 30px;
+    right: 30px;
+    z-index: 9999;
+    width: 50px;
+    height: 50px;
+    background: linear-gradient(135deg, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.5));
+    border: none;
+    border-radius: 50%;
+    color: white;
+    font-size: 20px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    backdrop-filter: blur(10px);
+    box-shadow: 
+        0 4px 20px rgba(0, 0, 0, 0.3),
+        0 0 0 1px rgba(255, 255, 255, 0.1),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    outline: none;
+}
+
+.volume-button:hover {
+    background: linear-gradient(135deg, rgba(30, 215, 96, 0.8), rgba(30, 215, 96, 0.6));
+    transform: scale(1.1) rotate(5deg);
+    box-shadow: 
+        0 6px 25px rgba(30, 215, 96, 0.4),
+        0 0 0 1px rgba(30, 215, 96, 0.3),
+        inset 0 1px 0 rgba(255, 255, 255, 0.2);
+}
+
+.volume-button:active {
+    transform: scale(0.95);
+    transition: transform 0.1s ease;
+}
+
+.volume-button:focus {
+    outline: 2px solid rgba(30, 215, 96, 0.5);
+    outline-offset: 2px;
+}
+
+/* Responsivo para mobile */
+@media (max-width: 768px) {
+    .volume-button {
+        top: 20px;
+        right: 20px;
+        width: 45px;
+        height: 45px;
+        font-size: 18px;
+    }
+}
+
+/* Indicador de Carregamento do Vídeo */
+.video-loading-indicator {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    z-index: 9998;
+    background: linear-gradient(135deg, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.6));
+    backdrop-filter: blur(15px);
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 
+        0 8px 32px rgba(0, 0, 0, 0.3),
+        0 0 0 1px rgba(255, 255, 255, 0.1),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    animation: slideInUp 0.3s ease-out;
+    max-width: 250px;
+}
+
+.loading-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    color: white;
+    font-family: 'August BOLD', sans-serif;
+}
+
+.loading-spinner {
+    width: 30px;
+    height: 30px;
+    border: 3px solid rgba(255, 255, 255, 0.2);
+    border-top: 3px solid rgba(30, 215, 96, 0.8);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+.loading-text {
+    font-size: 14px;
+    font-weight: 500;
+    color: rgba(255, 255, 255, 0.9);
+    text-align: center;
+}
+
+.loading-progress {
+    width: 100%;
+    height: 4px;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 2px;
+    overflow: hidden;
+    position: relative;
+}
+
+.loading-progress-bar {
+    height: 100%;
+    background: linear-gradient(90deg, rgba(30, 215, 96, 0.8), rgba(30, 215, 96, 1));
+    border-radius: 2px;
+    transition: width 0.3s ease;
+    position: relative;
+}
+
+.loading-progress-bar::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+    animation: shimmer 1.5s infinite;
+}
+
+.loading-percentage {
+    font-size: 12px;
+    font-weight: bold;
+    color: rgba(30, 215, 96, 0.9);
+    text-align: center;
+    min-width: 40px;
+}
+
+/* Animações */
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+@keyframes slideInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes shimmer {
+    0% { transform: translateX(-100%); }
+    100% { transform: translateX(100%); }
+}
+
+/* Responsivo para mobile - Indicador de carregamento */
+@media (max-width: 768px) {
+    .video-loading-indicator {
+        bottom: 20px;
+        right: 20px;
+        left: 20px;
+        max-width: none;
+        padding: 15px;
+    }
+    
+    .loading-content {
+        gap: 10px;
+    }
+    
+    .loading-spinner {
+        width: 25px;
+        height: 25px;
+        border-width: 2px;
+    }
+    
+    .loading-text {
+        font-size: 13px;
+    }
+    
+    .loading-percentage {
+        font-size: 11px;
+    }
+}
+
 /* Player do Spotify - Miniplayer Desktop */
 .spotify-player {
     position: fixed;

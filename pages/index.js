@@ -3,9 +3,42 @@ import { useState } from 'react'
 
 export default function Home() {
   const [isSpotifyExpanded, setIsSpotifyExpanded] = useState(false)
+  const [isMuted, setIsMuted] = useState(true) // Inicia mutado por padrão
+  const [isVideoLoading, setIsVideoLoading] = useState(true)
+  const [loadingProgress, setLoadingProgress] = useState(0)
 
   const toggleSpotify = () => {
     setIsSpotifyExpanded(!isSpotifyExpanded)
+  }
+
+  const toggleMute = () => {
+    const video = document.getElementById('background-video')
+    if (video) {
+      video.muted = !video.muted
+      setIsMuted(video.muted)
+    }
+  }
+
+  const handleVideoLoadStart = () => {
+    setIsVideoLoading(true)
+    setLoadingProgress(0)
+  }
+
+  const handleVideoProgress = () => {
+    const video = document.getElementById('background-video')
+    if (video && video.buffered.length > 0) {
+      const bufferedEnd = video.buffered.end(video.buffered.length - 1)
+      const duration = video.duration
+      if (duration > 0) {
+        const progress = (bufferedEnd / duration) * 100
+        setLoadingProgress(progress)
+      }
+    }
+  }
+
+  const handleVideoCanPlay = () => {
+    setIsVideoLoading(false)
+    setLoadingProgress(100)
   }
 
   return (
@@ -15,12 +48,39 @@ export default function Home() {
       </Head>
 
       <div className="background-container">
-        <video autoPlay muted loop className="background-video" id="background-video">
+        <video 
+          autoPlay 
+          muted 
+          loop 
+          className="background-video" 
+          id="background-video"
+          onLoadStart={handleVideoLoadStart}
+          onProgress={handleVideoProgress}
+          onCanPlay={handleVideoCanPlay}
+          onLoadedData={handleVideoCanPlay}
+        >
           <source src="/Helenfull.mp4" type="video/mp4" id="video-source" />
           Seu navegador não suporta vídeos HTML5.
         </video>
         <img src="/assets/helen_m.png" alt="Background estático móvel" className="background-image" />
       </div>
+
+      {/* Indicador de carregamento do vídeo */}
+      {isVideoLoading && (
+        <div className="video-loading-indicator">
+          <div className="loading-content">
+            <div className="loading-spinner" />
+            <div className="loading-text">Carregando vídeo...</div>
+            <div className="loading-progress">
+              <div 
+                className="loading-progress-bar" 
+                style={{ width: `${loadingProgress}%` }}
+              />
+            </div>
+            <div className="loading-percentage">{Math.round(loadingProgress)}%</div>
+          </div>
+        </div>
+      )}
 
       <a href="https://www.behance.net/gallery/221593177/Helen-AI-Brand-Humanizada-Autonoma" className="cta" id="enter-button" target="_blank" rel="noreferrer">
         Portfólio
@@ -31,6 +91,17 @@ export default function Home() {
       <a href="https://character.ai/chat/FWPjHgLGezhbasrl9E8AlYsFTQUU51G2Bv4X1HqgZr4" className="cta" id="chat-button" target="_blank" rel="noreferrer">
         Chat com Helen
       </a>
+
+      {/* Botão de volume para o vídeo de background */}
+      <button 
+        type="button"
+        className="volume-button" 
+        onClick={toggleMute}
+        aria-label={isMuted ? 'Ativar som do vídeo' : 'Desativar som do vídeo'}
+        title={isMuted ? 'Ativar som' : 'Desativar som'}
+      >
+        {isMuted ? '🔇' : '🔊'}
+      </button>
 
       <nav className="side-links">
         <a href="https://www.behance.net/gallery/221593177/Helen-AI-Brand-Humanizada-Autonoma" className="side-link" title="Portfólio no Behance" target="_blank" rel="noreferrer">
