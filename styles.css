@@ -412,7 +412,7 @@ body::before {
     margin-right: 5px;
 }
 
-/* Player do Spotify - Gaveta Expansível - Desktop */
+/* Player do Spotify - Miniplayer Desktop */
 .spotify-player {
     position: fixed;
     bottom: 30px;
@@ -430,14 +430,15 @@ body::before {
         inset 0 1px 0 rgba(255, 255, 255, 0.1);
 }
 
-/* Estado colapsado (gaveta fechada) */
+/* Estado colapsado - Desktop (Miniplayer funcional) */
 .spotify-player.collapsed {
-    width: 200px;
-    height: 60px;
+    width: 320px;
+    height: 152px; /* Altura padrão do embed compacto do Spotify */
     background: linear-gradient(135deg, rgba(30, 215, 96, 0.1), rgba(0, 0, 0, 0.3));
+    padding: 12px;
 }
 
-/* Estado expandido (gaveta aberta) */
+/* Estado expandido - Desktop (Player grande) */
 .spotify-player.expanded {
     width: 400px;
     height: 470px;
@@ -454,38 +455,45 @@ body::before {
         inset 0 1px 0 rgba(255, 255, 255, 0.2);
 }
 
-/* Botão de toggle */
+/* Botão de toggle - Desktop */
 .spotify-toggle {
-    display: flex;
+    display: none; /* Oculto por padrão no desktop */
     align-items: center;
     justify-content: space-between;
     width: 100%;
-    height: 60px;
-    padding: 0 20px;
-    background: transparent;
+    height: 40px;
+    padding: 0 15px;
+    background: rgba(0, 0, 0, 0.3);
     border: none;
     color: white;
     font-family: inherit;
-    font-size: 14px;
+    font-size: 12px;
     font-weight: 500;
     cursor: pointer;
     transition: all 0.3s ease;
     outline: none;
+    border-radius: 8px;
+    margin-bottom: 8px;
+}
+
+/* Mostrar botão apenas quando expandido no desktop */
+.spotify-player.expanded .spotify-toggle {
+    display: flex;
 }
 
 .spotify-toggle:hover {
-    background: rgba(30, 215, 96, 0.1);
+    background: rgba(30, 215, 96, 0.2);
 }
 
 .spotify-toggle:focus {
-    background: rgba(30, 215, 96, 0.15);
+    background: rgba(30, 215, 96, 0.25);
     outline: 2px solid rgba(30, 215, 96, 0.5);
     outline-offset: -2px;
 }
 
 .spotify-icon {
-    font-size: 20px;
-    margin-right: 10px;
+    font-size: 16px;
+    margin-right: 8px;
 }
 
 .spotify-text {
@@ -494,13 +502,39 @@ body::before {
 }
 
 .spotify-arrow {
-    font-size: 12px;
+    font-size: 10px;
     opacity: 0.7;
     transition: transform 0.3s ease;
 }
 
-.spotify-player.expanded .spotify-arrow {
-    transform: rotate(180deg);
+/* Botão de expansão no miniplayer */
+.spotify-expand-btn {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    width: 24px;
+    height: 24px;
+    background: rgba(0, 0, 0, 0.5);
+    border: none;
+    border-radius: 50%;
+    color: white;
+    font-size: 12px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    opacity: 0.7;
+}
+
+.spotify-expand-btn:hover {
+    background: rgba(30, 215, 96, 0.8);
+    opacity: 1;
+    transform: scale(1.1);
+}
+
+.spotify-player.expanded .spotify-expand-btn {
+    display: none;
 }
 
 /* Conteúdo do player */
@@ -581,14 +615,14 @@ body::before {
         transition: all 0.3s ease;
     }
     
-    /* Estado colapsado - Mobile */
+    /* Estado colapsado - Mobile (Gaveta fechada) */
     .spotify-player.collapsed {
         width: 180px;
         height: 50px;
         background: linear-gradient(135deg, rgba(30, 215, 96, 0.08), rgba(0, 0, 0, 0.2));
     }
     
-    /* Estado expandido - Mobile */
+    /* Estado expandido - Mobile (Gaveta aberta) */
     .spotify-player.expanded {
         width: calc(100vw - 40px);
         max-width: 350px;
@@ -602,11 +636,14 @@ body::before {
         opacity: 1;
     }
     
-    /* Botão toggle - Mobile */
+    /* Botão toggle - Mobile (sempre visível) */
     .spotify-toggle {
+        display: flex !important; /* Forçar exibição no mobile */
         height: 50px;
         padding: 0 15px;
         font-size: 13px;
+        background: transparent !important;
+        margin-bottom: 0;
     }
     
     .spotify-icon {
@@ -614,8 +651,20 @@ body::before {
         margin-right: 8px;
     }
     
+    /* Ocultar botão de expansão no mobile */
+    .spotify-expand-btn {
+        display: none !important;
+    }
+    
+    /* Conteúdo do player - Mobile */
     .spotify-content {
         padding-top: 12px;
+        display: none; /* Oculto por padrão no mobile */
+    }
+    
+    /* Mostrar conteúdo apenas quando expandido no mobile */
+    .spotify-player.expanded .spotify-content {
+        display: block;
     }
     
     .spotify-content iframe {
