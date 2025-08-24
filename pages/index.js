@@ -94,8 +94,8 @@ export default function Home() {
       <a href="https://inhabitants.zone/" className="cta" id="comic-button" target="_blank" rel="noreferrer">
         My Comic
       </a>
-      <a href="https://character.ai/chat/FWPjHgLGezhbasrl9E8AlYsFTQUU51G2Bv4X1HqgZr4" className="cta" id="chat-button" target="_blank" rel="noreferrer">
-        Chat com Helen
+      <a href="https://chatgpt.com/g/g-68ab55d6ed9c8191a435622d7724a7b2-helen-ailith" className="cta" id="chat-button" target="_blank" rel="noreferrer">
+        Conversar com Helen
       </a>
 
       {/* Botão de volume para o vídeo de background */}
