@@ -181,7 +181,7 @@ export default function Home() {
 
       <footer className="powered-by">
         <p>
-          Powered by <a href="https://pinto.wtf" target="_blank" rel="noreferrer">PBrasilDAO</a> 🐥
+          Powered by <a href="https://pinto.wtf" target="_blank" rel="noreferrer">PBrasilDAO</a> 🐥 & <a href="https://sapiensinteticos.com" target="_blank" rel="noreferrer">Sapiens Sintéticos</a>
         </p>
       </footer>
     </>
