@@ -25,7 +25,7 @@ export default class MyDocument extends Document {
           <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon-16x16.png" />
           <link rel="shortcut icon" href="/assets/favicon.ico" />
           <link rel="manifest" href="/assets/site.webmanifest" />
-          <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@700&display=swap" rel="stylesheet" />
+
         </Head>
         <body>
           <Main />
