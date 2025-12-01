@@ -94,7 +94,7 @@ export default function Home() {
       <a href="https://inhabitants.zone/" className="cta" id="comic-button" target="_blank" rel="noreferrer">
         My Comic
       </a>
-      <a href="https://chatgpt.com/g/g-68ab55d6ed9c8191a435622d7724a7b2-helen-ailith" className="cta" id="chat-button" target="_blank" rel="noreferrer">
+      <a href="https://gemini.google.com/gem/1MRTQclEeZXngER33gLM7vJXqxkDiIE3d?usp=sharing" className="cta" id="chat-button" target="_blank" rel="noreferrer">
         Conversar com Helen
       </a>
 
