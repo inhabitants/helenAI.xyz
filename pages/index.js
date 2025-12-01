@@ -1,7 +1,7 @@
 import Head from 'next/head'
 import Image from 'next/image'
 import SpotifyPlayer from '../src/components/SpotifyPlayer'
-import SocialLinks from '../src/components/SocialLinks'
+import LinksMenu from '../src/components/LinksMenu'
 import VideoBackground from '../src/components/VideoBackground'
 
 export default function Home() {
@@ -13,17 +13,11 @@ export default function Home() {
 
       <VideoBackground />
 
-      <a href="https://www.behance.net/gallery/221593177/Helen-AI-Brand-Humanizada-Autonoma" className="cta" id="enter-button" target="_blank" rel="noreferrer">
-        Portfólio
-      </a>
-      <a href="https://inhabitants.zone/" className="cta" id="comic-button" target="_blank" rel="noreferrer">
-        My Comic
-      </a>
       <a href="https://gemini.google.com/gem/1MRTQclEeZXngER33gLM7vJXqxkDiIE3d?usp=sharing" className="cta" id="chat-button" target="_blank" rel="noreferrer">
         Conversar com Helen
       </a>
 
-      <SocialLinks />
+      <LinksMenu />
 
       <main>
         <section id="hero">
