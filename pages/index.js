@@ -14,6 +14,7 @@ export default function Home() {
       <VideoBackground />
 
       <a href="https://www.behance.net/gallery/221593177/Helen-AI-Brand-Humanizada-Autonoma" id="enter-button" target="_blank" rel="noreferrer">
+        <Image src="/assets/behance.png" alt="Portfólio" width={24} height={24} style={{ marginRight: '8px' }} />
         Portfólio
       </a>
 
