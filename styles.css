@@ -224,719 +224,587 @@ body::before {
         /* Centraliza o texto */
         width: auto;
         /* Permite que o texto se ajuste naturalmente */
+        z-index: 9998;
+        background: linear-gradient(135deg, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.6));
+        backdrop-filter: blur(15px);
+        border-radius: 12px;
+        padding: 20px;
+        box-shadow:
+            0 8px 32px rgba(0, 0, 0, 0.3),
+            0 0 0 1px rgba(255, 255, 255, 0.1),
+            inset 0 1px 0 rgba(255, 255, 255, 0.1);
+        animation: slideInUp 0.3s ease-out;
+        max-width: 250px;
+    }
+
+    .loading-content {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 12px;
+        color: white;
+        font-family: 'August BOLD', sans-serif;
+    }
+
+    .loading-spinner {
+        width: 30px;
+        height: 30px;
+        border: 3px solid rgba(255, 255, 255, 0.2);
+        border-top: 3px solid rgba(30, 215, 96, 0.8);
+        border-radius: 50%;
+        animation: spin 1s linear infinite;
+    }
+
+    .loading-text {
+        font-size: 14px;
+        font-weight: 500;
+        color: rgba(255, 255, 255, 0.9);
+        text-align: center;
+    }
+
+    .loading-progress {
+        width: 100%;
+        height: 4px;
+        background: rgba(255, 255, 255, 0.2);
+        border-radius: 2px;
+        overflow: hidden;
+        position: relative;
+    }
+
+    .loading-progress-bar {
+        height: 100%;
+        background: linear-gradient(90deg, rgba(30, 215, 96, 0.8), rgba(30, 215, 96, 1));
+        border-radius: 2px;
+        transition: width 0.3s ease;
+        position: relative;
+    }
+
+    .loading-progress-bar::after {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+        animation: shimmer 1.5s infinite;
+    }
+
+    .loading-percentage {
         font-size: 12px;
-        /* Texto ligeiramente menor no mobile */
-    }
-}
-
-/* Botão "My Comic" lúdico */
-#comic-button {
-    position: fixed;
-    top: 20px;
-    right: 20px;
-    /* Posicionado no canto superior direito */
-    background: linear-gradient(45deg, #ff5b8f, #ff8e6e);
-    /* Gradiente lúdico e colorido */
-    color: white;
-    padding: 10px 25px;
-    text-decoration: none;
-    font-family: 'August BOLD', sans-serif;
-    border-radius: 15px;
-    /* Bordas mais arredondadas */
-    font-size: 1.2rem;
-    font-weight: bold;
-    box-shadow: 0 4px 10px rgba(255, 91, 143, 0.4);
-    /* Sombra colorida */
-    border: 2px solid #ffcbe0;
-    /* Borda suave */
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: 5px;
-    transition: all 0.3s ease;
-    z-index: 10;
-    animation: float 3s ease-in-out infinite;
-    /* Animação de flutuação */
-    height: 25px;
-}
-
-/* Hover e efeito para o botão My Comic */
-#comic-button:hover {
-    background: linear-gradient(45deg, #ff8e6e, #ff5b8f);
-    /* Gradiente invertido no hover */
-    box-shadow: 0 6px 15px rgba(255, 91, 143, 0.6);
-    /* Sombra mais forte no hover */
-    transform: scale(1.05) rotate(-2deg);
-    /* Leve aumento e rotação no hover */
-}
-
-#comic-button:active {
-    animation: wobble 0.5s ease;
-    /* Animação de wobble ao clicar */
-}
-
-/* Ícone para o botão My Comic */
-#comic-button::before {
-    content: '📚';
-    /* Ícone de livros/quadrinhos */
-
-    #chat-button::before {
-        content: '💬';
-        font-size: 1rem;
-        display: inline-block;
-        vertical-align: middle;
-        margin-right: 5px;
+        font-weight: bold;
+        color: rgba(30, 215, 96, 0.9);
+        text-align: center;
+        min-width: 40px;
     }
 
-    /* Animação de brilho pulsante para o botão de volume */
-    @keyframes glow-pulse {
+    /* Animações */
+    @keyframes spin {
         0% {
-            box-shadow:
-                0 4px 20px rgba(0, 0, 0, 0.3),
-                0 0 0 1px rgba(255, 255, 255, 0.1),
-                inset 0 1px 0 rgba(255, 255, 255, 0.1),
-                0 0 20px rgba(30, 215, 96, 0.4),
-                0 0 30px rgba(30, 215, 96, 0.2);
-        }
-
-        50% {
-            box-shadow:
-                0 4px 20px rgba(0, 0, 0, 0.3),
-                0 0 0 1px rgba(255, 255, 255, 0.1),
-                inset 0 1px 0 rgba(255, 255, 255, 0.1),
-                0 0 30px rgba(30, 215, 96, 0.6),
-                0 0 50px rgba(30, 215, 96, 0.4),
-                0 0 70px rgba(30, 215, 96, 0.2);
+            transform: rotate(0deg);
         }
 
         100% {
-            box-shadow:
-                0 4px 20px rgba(0, 0, 0, 0.3),
-                0 0 0 1px rgba(255, 255, 255, 0.1),
-                inset 0 1px 0 rgba(255, 255, 255, 0.1),
-                0 0 20px rgba(30, 215, 96, 0.4),
-                0 0 30px rgba(30, 215, 96, 0.2);
-            outline: none;
-            animation: glow-pulse 2s ease-in-out infinite;
+            transform: rotate(360deg);
+        }
+    }
+
+    @keyframes slideInUp {
+        from {
+            opacity: 0;
+            transform: translateY(20px);
         }
 
-        .volume-button:hover {
-            background: linear-gradient(135deg, rgba(30, 215, 96, 0.8), rgba(30, 215, 96, 0.6));
-            transform: scale(1.1) rotate(5deg);
-            box-shadow:
-                0 6px 25px rgba(30, 215, 96, 0.4),
-                0 0 0 1px rgba(30, 215, 96, 0.3),
-                inset 0 1px 0 rgba(255, 255, 255, 0.2),
-                0 0 40px rgba(30, 215, 96, 0.8),
-                0 0 60px rgba(30, 215, 96, 0.5);
-            animation: none;
-            /* Para a animação pulsante no hover */
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    @keyframes shimmer {
+        0% {
+            transform: translateX(-100%);
         }
 
-        .volume-button:active {
-            transform: scale(0.95);
-            transition: transform 0.1s ease;
+        100% {
+            transform: translateX(100%);
         }
+    }
 
-        .volume-button:focus {
-            outline: 2px solid rgba(30, 215, 96, 0.5);
-            outline-offset: 2px;
-        }
-
-        /* Responsivo para mobile - Ocultar botão de volume */
-        @media (max-width: 768px) {
-            .volume-button {
-                display: none;
-                /* Oculto no mobile pois não há vídeo */
-            }
-        }
-
-        /* Indicador de Carregamento do Vídeo */
+    /* Responsivo para mobile - Indicador de carregamento */
+    @media (max-width: 768px) {
         .video-loading-indicator {
-            position: fixed;
-            bottom: 30px;
-            right: 30px;
-            z-index: 9998;
-            background: linear-gradient(135deg, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.6));
-            backdrop-filter: blur(15px);
-            border-radius: 12px;
-            padding: 20px;
-            box-shadow:
-                0 8px 32px rgba(0, 0, 0, 0.3),
-                0 0 0 1px rgba(255, 255, 255, 0.1),
-                inset 0 1px 0 rgba(255, 255, 255, 0.1);
-            animation: slideInUp 0.3s ease-out;
-            max-width: 250px;
-        }
-
-        .loading-content {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 12px;
-            color: white;
-            font-family: 'August BOLD', sans-serif;
-        }
-
-        .loading-spinner {
-            width: 30px;
-            height: 30px;
-            border: 3px solid rgba(255, 255, 255, 0.2);
-            border-top: 3px solid rgba(30, 215, 96, 0.8);
-            border-radius: 50%;
-            animation: spin 1s linear infinite;
-        }
-
-        .loading-text {
-            font-size: 14px;
-            font-weight: 500;
-            color: rgba(255, 255, 255, 0.9);
-            text-align: center;
-        }
-
-        .loading-progress {
-            width: 100%;
-            height: 4px;
-            background: rgba(255, 255, 255, 0.2);
-            border-radius: 2px;
-            overflow: hidden;
-            position: relative;
-        }
-
-        .loading-progress-bar {
-            height: 100%;
-            background: linear-gradient(90deg, rgba(30, 215, 96, 0.8), rgba(30, 215, 96, 1));
-            border-radius: 2px;
-            transition: width 0.3s ease;
-            position: relative;
-        }
-
-        .loading-progress-bar::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
-            animation: shimmer 1.5s infinite;
-        }
-
-        .loading-percentage {
-            font-size: 12px;
-            font-weight: bold;
-            color: rgba(30, 215, 96, 0.9);
-            text-align: center;
-            min-width: 40px;
-        }
-
-        /* Animações */
-        @keyframes spin {
-            0% {
-                transform: rotate(0deg);
-            }
-
-            100% {
-                transform: rotate(360deg);
-            }
-        }
-
-        @keyframes slideInUp {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        @keyframes shimmer {
-            0% {
-                transform: translateX(-100%);
-            }
-
-            100% {
-                transform: translateX(100%);
-            }
-        }
-
-        /* Responsivo para mobile - Indicador de carregamento */
-        @media (max-width: 768px) {
-            .video-loading-indicator {
-                bottom: 20px;
-                right: 20px;
-                left: 20px;
-                max-width: none;
-                padding: 15px;
-            }
-
-            .loading-content {
-                gap: 10px;
-            }
-
-            .loading-spinner {
-                width: 25px;
-                height: 25px;
-                border-width: 2px;
-            }
-
-            .loading-text {
-                font-size: 13px;
-            }
-
-            .loading-percentage {
-                font-size: 11px;
-            }
-        }
-
-        /* Player do Spotify - Miniplayer Desktop */
-        .spotify-player {
-            position: fixed;
-            bottom: 30px;
-            left: 30px;
-            z-index: 9999;
-            display: flex;
-            flex-direction: column;
-            border-radius: 16px;
-            overflow: hidden;
-            backdrop-filter: blur(10px);
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            box-shadow:
-                0 8px 32px rgba(0, 0, 0, 0.3),
-                0 0 0 1px rgba(255, 255, 255, 0.1),
-                inset 0 1px 0 rgba(255, 255, 255, 0.1);
-        }
-
-        /* Estado colapsado - Desktop (Miniplayer funcional) */
-        .spotify-player.collapsed {
-            width: 320px;
-            height: 152px;
-            /* Altura padrão do embed compacto do Spotify */
-            background: linear-gradient(135deg, rgba(30, 215, 96, 0.1), rgba(0, 0, 0, 0.3));
-            padding: 12px;
-        }
-
-        /* Estado expandido - Desktop (Player grande) */
-        .spotify-player.expanded {
-            width: 400px;
-            height: 470px;
-            background: linear-gradient(135deg, rgba(30, 215, 96, 0.1), rgba(0, 0, 0, 0.3));
+            bottom: 20px;
+            right: 20px;
+            left: 20px;
+            max-width: none;
             padding: 15px;
         }
 
-        .spotify-player:hover {
-            transform: scale(1.02) translateY(-3px);
-            backdrop-filter: blur(15px);
+        .loading-content {
+            gap: 10px;
+        }
+
+        .loading-spinner {
+            width: 25px;
+            height: 25px;
+            border-width: 2px;
+        }
+
+        .loading-text {
+            font-size: 13px;
+        }
+
+        .loading-percentage {
+            font-size: 11px;
+        }
+    }
+
+    /* Player do Spotify - Miniplayer Desktop */
+    .spotify-player {
+        position: fixed;
+        bottom: 30px;
+        left: 30px;
+        z-index: 9999;
+        display: flex;
+        flex-direction: column;
+        border-radius: 16px;
+        overflow: hidden;
+        backdrop-filter: blur(10px);
+        transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        box-shadow:
+            0 8px 32px rgba(0, 0, 0, 0.3),
+            0 0 0 1px rgba(255, 255, 255, 0.1),
+            inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    }
+
+    /* Estado colapsado - Desktop (Miniplayer funcional) */
+    .spotify-player.collapsed {
+        width: 320px;
+        height: 152px;
+        /* Altura padrão do embed compacto do Spotify */
+        background: linear-gradient(135deg, rgba(30, 215, 96, 0.1), rgba(0, 0, 0, 0.3));
+        padding: 12px;
+    }
+
+    /* Estado expandido - Desktop (Player grande) */
+    .spotify-player.expanded {
+        width: 400px;
+        height: 470px;
+        background: linear-gradient(135deg, rgba(30, 215, 96, 0.1), rgba(0, 0, 0, 0.3));
+        padding: 15px;
+    }
+
+    .spotify-player:hover {
+        transform: scale(1.02) translateY(-3px);
+        backdrop-filter: blur(15px);
+        box-shadow:
+            0 12px 40px rgba(0, 0, 0, 0.4),
+            0 0 0 1px rgba(30, 215, 96, 0.3),
+            inset 0 1px 0 rgba(255, 255, 255, 0.2);
+    }
+
+    /* Botão de toggle - Desktop */
+    .spotify-toggle {
+        display: none;
+        /* Oculto por padrão no desktop */
+        align-items: center;
+        justify-content: space-between;
+        width: 100%;
+        height: 40px;
+        padding: 0 15px;
+        background: rgba(0, 0, 0, 0.3);
+        border: none;
+        color: white;
+        font-family: inherit;
+        font-size: 12px;
+        font-weight: 500;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        outline: none;
+        border-radius: 8px;
+        margin-bottom: 8px;
+    }
+
+    /* Mostrar botão apenas quando expandido no desktop */
+    .spotify-player.expanded .spotify-toggle {
+        display: flex;
+    }
+
+    .spotify-toggle:hover {
+        background: rgba(30, 215, 96, 0.2);
+    }
+
+    .spotify-toggle:focus {
+        background: rgba(30, 215, 96, 0.25);
+        outline: 2px solid rgba(30, 215, 96, 0.5);
+        outline-offset: -2px;
+    }
+
+    .spotify-icon {
+        font-size: 16px;
+        margin-right: 8px;
+    }
+
+    .spotify-text {
+        flex: 1;
+        text-align: left;
+    }
+
+    .spotify-arrow {
+        font-size: 10px;
+        opacity: 0.7;
+        transition: transform 0.3s ease;
+    }
+
+    /* Botão de expansão no miniplayer */
+    .spotify-expand-btn {
+        position: absolute;
+        top: 8px;
+        right: 8px;
+        width: 24px;
+        height: 24px;
+        background: rgba(0, 0, 0, 0.5);
+        border: none;
+        border-radius: 50%;
+        color: white;
+        font-size: 12px;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.3s ease;
+        opacity: 0.7;
+    }
+
+    .spotify-expand-btn:hover {
+        background: rgba(30, 215, 96, 0.8);
+        opacity: 1;
+        transform: scale(1.1);
+    }
+
+    .spotify-player.expanded .spotify-expand-btn {
+        display: none;
+    }
+
+    /* Conteúdo do player */
+    .spotify-content {
+        flex: 1;
+        padding-top: 15px;
+        animation: fadeIn 0.3s ease-in-out;
+    }
+
+    .spotify-content iframe {
+        border-radius: 12px;
+        width: 100%;
+        height: 100%;
+        border: none;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+    }
+
+    @keyframes fadeIn {
+        from {
+            opacity: 0;
+            transform: translateY(10px);
+        }
+
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    /* Ajustes responsivos para dispositivos móveis */
+    @media (max-width: 768px) {
+        #enter-button {
+            top: 10px;
+            left: 10px;
+            /* Posicionado no canto superior esquerdo */
+            right: auto;
+            /* Remove o posicionamento à direita */
+            transform: none;
+            /* Remove a transformação */
+            font-size: 0.9rem;
+            padding: 6px 15px;
+            height: 20px;
+        }
+
+        #comic-button {
+            top: 10px;
+            right: 10px;
+            /* Mantém no canto direito */
+            font-size: 0.9rem;
+            padding: 6px 15px;
+            height: 20px;
+            animation: none;
+            /* Remove a animação em dispositivos móveis */
+        }
+
+        /* Botão Chat com Helen - Mobile */
+        #chat-button {
+            position: fixed;
+            bottom: 85px;
+            /* Posicionado acima do powered-by */
+            left: 50%;
+            transform: translateX(-50%);
+            top: auto;
+            right: auto;
+            font-size: 0.9rem;
+            padding: 6px 15px;
+            height: 20px;
+        }
+
+        #chat-button:active {
+            animation: none !important;
+        }
+
+        /* Player do Spotify - Gaveta Expansível - Mobile */
+        .spotify-player {
+            top: 80px;
+            bottom: auto;
+            left: 50%;
+            transform: translateX(-50%);
+            border-radius: 12px;
+            backdrop-filter: blur(8px);
             box-shadow:
-                0 12px 40px rgba(0, 0, 0, 0.4),
-                0 0 0 1px rgba(30, 215, 96, 0.3),
-                inset 0 1px 0 rgba(255, 255, 255, 0.2);
-        }
-
-        /* Botão de toggle - Desktop */
-        .spotify-toggle {
-            display: none;
-            /* Oculto por padrão no desktop */
-            align-items: center;
-            justify-content: space-between;
-            width: 100%;
-            height: 40px;
-            padding: 0 15px;
-            background: rgba(0, 0, 0, 0.3);
-            border: none;
-            color: white;
-            font-family: inherit;
-            font-size: 12px;
-            font-weight: 500;
-            cursor: pointer;
+                0 6px 25px rgba(0, 0, 0, 0.2),
+                0 0 0 1px rgba(255, 255, 255, 0.05);
+            opacity: 0.95;
             transition: all 0.3s ease;
-            outline: none;
-            border-radius: 8px;
-            margin-bottom: 8px;
         }
 
-        /* Mostrar botão apenas quando expandido no desktop */
-        .spotify-player.expanded .spotify-toggle {
-            display: flex;
+        /* Estado colapsado - Mobile (Gaveta fechada) */
+        .spotify-player.collapsed {
+            width: 180px;
+            height: 50px;
+            background: linear-gradient(135deg, rgba(30, 215, 96, 0.08), rgba(0, 0, 0, 0.2));
         }
 
-        .spotify-toggle:hover {
-            background: rgba(30, 215, 96, 0.2);
+        /* Estado expandido - Mobile (Gaveta aberta) */
+        .spotify-player.expanded {
+            width: calc(100vw - 40px);
+            max-width: 350px;
+            height: 420px;
+            background: linear-gradient(135deg, rgba(30, 215, 96, 0.08), rgba(0, 0, 0, 0.2));
+            padding: 12px;
         }
 
-        .spotify-toggle:focus {
-            background: rgba(30, 215, 96, 0.25);
-            outline: 2px solid rgba(30, 215, 96, 0.5);
-            outline-offset: -2px;
+        .spotify-player:hover {
+            transform: translateX(-50%) scale(1.01);
+            opacity: 1;
+        }
+
+        /* Botão toggle - Mobile (sempre visível) */
+        .spotify-toggle {
+            display: flex !important;
+            /* Forçar exibição no mobile */
+            height: 50px;
+            padding: 0 15px;
+            font-size: 13px;
+            background: transparent !important;
+            margin-bottom: 0;
         }
 
         .spotify-icon {
-            font-size: 16px;
+            font-size: 18px;
             margin-right: 8px;
         }
 
-        .spotify-text {
-            flex: 1;
-            text-align: left;
-        }
-
-        .spotify-arrow {
-            font-size: 10px;
-            opacity: 0.7;
-            transition: transform 0.3s ease;
-        }
-
-        /* Botão de expansão no miniplayer */
+        /* Ocultar botão de expansão no mobile */
         .spotify-expand-btn {
-            position: absolute;
-            top: 8px;
-            right: 8px;
-            width: 24px;
-            height: 24px;
-            background: rgba(0, 0, 0, 0.5);
-            border: none;
-            border-radius: 50%;
-            color: white;
-            font-size: 12px;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: all 0.3s ease;
-            opacity: 0.7;
+            display: none !important;
         }
 
-        .spotify-expand-btn:hover {
-            background: rgba(30, 215, 96, 0.8);
-            opacity: 1;
-            transform: scale(1.1);
-        }
-
-        .spotify-player.expanded .spotify-expand-btn {
-            display: none;
-        }
-
-        /* Conteúdo do player */
+        /* Conteúdo do player - Mobile */
         .spotify-content {
-            flex: 1;
-            padding-top: 15px;
-            animation: fadeIn 0.3s ease-in-out;
+            padding-top: 12px;
+            display: none;
+            /* Oculto por padrão no mobile */
+        }
+
+        /* Mostrar conteúdo apenas quando expandido no mobile */
+        .spotify-player.expanded .spotify-content {
+            display: block;
         }
 
         .spotify-content iframe {
-            border-radius: 12px;
-            width: 100%;
-            height: 100%;
-            border: none;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+            border-radius: 8px;
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.15);
         }
 
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(10px);
-            }
+        /* Powered by foi movido para uma media query específica acima */
+    }
 
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+    /* Animação de carregamento */
+    .loading-indicator {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        background-color: rgba(0, 0, 0, 0.5);
+        color: white;
+        border-radius: 20px;
+        padding: 8px 16px;
+        font-size: 12px;
+        z-index: 9999;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-family: 'Roboto', sans-serif;
+        backdrop-filter: blur(3px);
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        letter-spacing: 1px;
+    }
+
+    .loading-indicator::after {
+        content: '';
+        position: relative;
+        width: 6px;
+        height: 6px;
+        margin-left: 8px;
+        border-radius: 50%;
+        background-color: white;
+        animation: pulse 1.5s infinite ease-in-out;
+    }
+
+    @keyframes pulse {
+        0% {
+            transform: scale(0.3);
+            opacity: 0.2;
         }
 
-        /* Ajustes responsivos para dispositivos móveis */
-        @media (max-width: 768px) {
-            #enter-button {
-                top: 10px;
-                left: 10px;
-                /* Posicionado no canto superior esquerdo */
-                right: auto;
-                /* Remove o posicionamento à direita */
-                transform: none;
-                /* Remove a transformação */
-                font-size: 0.9rem;
-                padding: 6px 15px;
-                height: 20px;
-            }
-
-            #comic-button {
-                top: 10px;
-                right: 10px;
-                /* Mantém no canto direito */
-                font-size: 0.9rem;
-                padding: 6px 15px;
-                height: 20px;
-                animation: none;
-                /* Remove a animação em dispositivos móveis */
-            }
-
-            /* Botão Chat com Helen - Mobile */
-            #chat-button {
-                position: fixed;
-                bottom: 85px;
-                /* Posicionado acima do powered-by */
-                left: 50%;
-                transform: translateX(-50%);
-                top: auto;
-                right: auto;
-                font-size: 0.9rem;
-                padding: 6px 15px;
-                height: 20px;
-            }
-
-            #chat-button:active {
-                animation: none !important;
-            }
-
-            /* Player do Spotify - Gaveta Expansível - Mobile */
-            .spotify-player {
-                top: 80px;
-                bottom: auto;
-                left: 50%;
-                transform: translateX(-50%);
-                border-radius: 12px;
-                backdrop-filter: blur(8px);
-                box-shadow:
-                    0 6px 25px rgba(0, 0, 0, 0.2),
-                    0 0 0 1px rgba(255, 255, 255, 0.05);
-                opacity: 0.95;
-                transition: all 0.3s ease;
-            }
-
-            /* Estado colapsado - Mobile (Gaveta fechada) */
-            .spotify-player.collapsed {
-                width: 180px;
-                height: 50px;
-                background: linear-gradient(135deg, rgba(30, 215, 96, 0.08), rgba(0, 0, 0, 0.2));
-            }
-
-            /* Estado expandido - Mobile (Gaveta aberta) */
-            .spotify-player.expanded {
-                width: calc(100vw - 40px);
-                max-width: 350px;
-                height: 420px;
-                background: linear-gradient(135deg, rgba(30, 215, 96, 0.08), rgba(0, 0, 0, 0.2));
-                padding: 12px;
-            }
-
-            .spotify-player:hover {
-                transform: translateX(-50%) scale(1.01);
-                opacity: 1;
-            }
-
-            /* Botão toggle - Mobile (sempre visível) */
-            .spotify-toggle {
-                display: flex !important;
-                /* Forçar exibição no mobile */
-                height: 50px;
-                padding: 0 15px;
-                font-size: 13px;
-                background: transparent !important;
-                margin-bottom: 0;
-            }
-
-            .spotify-icon {
-                font-size: 18px;
-                margin-right: 8px;
-            }
-
-            /* Ocultar botão de expansão no mobile */
-            .spotify-expand-btn {
-                display: none !important;
-            }
-
-            /* Conteúdo do player - Mobile */
-            .spotify-content {
-                padding-top: 12px;
-                display: none;
-                /* Oculto por padrão no mobile */
-            }
-
-            /* Mostrar conteúdo apenas quando expandido no mobile */
-            .spotify-player.expanded .spotify-content {
-                display: block;
-            }
-
-            .spotify-content iframe {
-                border-radius: 8px;
-                box-shadow: 0 2px 15px rgba(0, 0, 0, 0.15);
-            }
-
-            /* Powered by foi movido para uma media query específica acima */
+        50% {
+            transform: scale(1);
+            opacity: 1;
         }
 
-        /* Animação de carregamento */
+        100% {
+            transform: scale(0.3);
+            opacity: 0.2;
+        }
+    }
+
+    /* Ajuste para dispositivos móveis */
+    @media (max-width: 768px) {
         .loading-indicator {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            background-color: rgba(0, 0, 0, 0.5);
-            color: white;
-            border-radius: 20px;
-            padding: 8px 16px;
-            font-size: 12px;
-            z-index: 9999;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-family: 'Roboto', sans-serif;
-            backdrop-filter: blur(3px);
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-            letter-spacing: 1px;
+            bottom: 50px;
+            font-size: 10px;
+            padding: 6px 12px;
         }
+    }
 
-        .loading-indicator::after {
-            content: '';
-            position: relative;
-            width: 6px;
-            height: 6px;
-            margin-left: 8px;
-            border-radius: 50%;
-            background-color: white;
-            animation: pulse 1.5s infinite ease-in-out;
-        }
+    /* Links Menu */
+    .links-menu-container {
+        position: fixed;
+        bottom: 30px;
+        left: 30px;
+        z-index: 10000;
+    }
 
-        @keyframes pulse {
-            0% {
-                transform: scale(0.3);
-                opacity: 0.2;
-            }
+    .links-menu-button {
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+        background: linear-gradient(135deg, #ff4081, #ff8e6e);
+        border: none;
+        color: white;
+        font-size: 30px;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 4px 15px rgba(255, 64, 129, 0.4);
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        z-index: 10001;
+    }
 
-            50% {
-                transform: scale(1);
-                opacity: 1;
-            }
+    .links-menu-button:hover {
+        transform: scale(1.1) rotate(90deg);
+        box-shadow: 0 6px 20px rgba(255, 64, 129, 0.6);
+    }
 
-            100% {
-                transform: scale(0.3);
-                opacity: 0.2;
-            }
-        }
+    .links-menu-button.open {
+        transform: rotate(45deg);
+        background: #333;
+    }
 
-        /* Ajuste para dispositivos móveis */
-        @media (max-width: 768px) {
-            .loading-indicator {
-                bottom: 50px;
-                font-size: 10px;
-                padding: 6px 12px;
-            }
-        }
+    .links-list {
+        position: absolute;
+        bottom: 80px;
+        left: 0;
+        background: rgba(0, 0, 0, 0.8);
+        backdrop-filter: blur(15px);
+        border-radius: 20px;
+        padding: 20px;
+        width: 280px;
+        opacity: 0;
+        transform: translateY(20px) scale(0.9);
+        pointer-events: none;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+    }
 
-        /* Links Menu */
+    .links-list.open {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+        pointer-events: all;
+    }
+
+    .main-links {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        margin-bottom: 20px;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        padding-bottom: 15px;
+    }
+
+    .menu-item {
+        display: block;
+        padding: 12px 15px;
+        background: rgba(255, 255, 255, 0.1);
+        border-radius: 12px;
+        color: white;
+        text-decoration: none;
+        font-family: var(--font-august-bold), sans-serif;
+        font-size: 1.1rem;
+        transition: all 0.2s ease;
+        text-align: center;
+    }
+
+    .menu-item:hover {
+        background: rgba(255, 255, 255, 0.2);
+        transform: translateX(5px);
+    }
+
+    .social-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 10px;
+    }
+
+    .social-item {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 8px;
+        border-radius: 10px;
+        transition: all 0.2s ease;
+    }
+
+    .social-item:hover {
+        background: rgba(255, 255, 255, 0.1);
+        transform: scale(1.1);
+    }
+
+    /* Ajuste para mobile */
+    @media (max-width: 768px) {
         .links-menu-container {
-            position: fixed;
-            bottom: 30px;
-            left: 30px;
-            z-index: 10000;
-        }
-
-        .links-menu-button {
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
-            background: linear-gradient(135deg, #ff4081, #ff8e6e);
-            border: none;
-            color: white;
-            font-size: 30px;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            box-shadow: 0 4px 15px rgba(255, 64, 129, 0.4);
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            z-index: 10001;
-        }
-
-        .links-menu-button:hover {
-            transform: scale(1.1) rotate(90deg);
-            box-shadow: 0 6px 20px rgba(255, 64, 129, 0.6);
-        }
-
-        .links-menu-button.open {
-            transform: rotate(45deg);
-            background: #333;
+            bottom: 20px;
+            left: 20px;
         }
 
         .links-list {
-            position: absolute;
-            bottom: 80px;
-            left: 0;
-            background: rgba(0, 0, 0, 0.8);
-            backdrop-filter: blur(15px);
-            border-radius: 20px;
-            padding: 20px;
-            width: 280px;
-            opacity: 0;
-            transform: translateY(20px) scale(0.9);
-            pointer-events: none;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            width: 260px;
         }
-
-        .links-list.open {
-            opacity: 1;
-            transform: translateY(0) scale(1);
-            pointer-events: all;
-        }
-
-        .main-links {
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-            margin-bottom: 20px;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-            padding-bottom: 15px;
-        }
-
-        .menu-item {
-            display: block;
-            padding: 12px 15px;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 12px;
-            color: white;
-            text-decoration: none;
-            font-family: var(--font-august-bold), sans-serif;
-            font-size: 1.1rem;
-            transition: all 0.2s ease;
-            text-align: center;
-        }
-
-        .menu-item:hover {
-            background: rgba(255, 255, 255, 0.2);
-            transform: translateX(5px);
-        }
-
-        .social-grid {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 10px;
-        }
-
-        .social-item {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 8px;
-            border-radius: 10px;
-            transition: all 0.2s ease;
-        }
-
-        .social-item:hover {
-            background: rgba(255, 255, 255, 0.1);
-            transform: scale(1.1);
-        }
-
-        /* Ajuste para mobile */
-        @media (max-width: 768px) {
-            .links-menu-container {
-                bottom: 20px;
-                left: 20px;
-            }
-
-            .links-list {
-                width: 260px;
-            }
-        }
+    }
