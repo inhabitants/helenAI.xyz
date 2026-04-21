@@ -1,50 +1,66 @@
 import Head from 'next/head'
-import { useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 
 export default function Home() {
   const [isSpotifyExpanded, setIsSpotifyExpanded] = useState(false)
   const [isMuted, setIsMuted] = useState(true)
   const [isVideoLoading, setIsVideoLoading] = useState(true)
   const [loadingProgress, setLoadingProgress] = useState(0)
+  const videoRef = useRef(null)
 
   const toggleSpotify = () => {
     setIsSpotifyExpanded(!isSpotifyExpanded)
   }
 
   const toggleMute = () => {
-    const video = document.getElementById('background-video')
+    const video = videoRef.current
     if (video) {
       video.muted = !video.muted
       setIsMuted(video.muted)
     }
   }
 
-  const handleVideoLoadStart = () => {
-    setIsVideoLoading(true)
-    setLoadingProgress(0)
+  useEffect(() => {
+    const video = videoRef.current
+    if (!video) return
 
-    const progressInterval = setInterval(() => {
-      setLoadingProgress(prev => {
-        if (prev >= 90) {
-          clearInterval(progressInterval)
-          return prev
-        }
-        return prev + Math.random() * 15
-      })
-    }, 200)
-  }
+    let progressInterval = null
+    let finished = false
 
-  const handleVideoCanPlay = () => {
-    setIsVideoLoading(false)
-    setLoadingProgress(100)
-
-    const video = document.getElementById('background-video')
-    if (video) {
-      video.play().catch(error => {
-        console.log('Autoplay prevented:', error)
-      })
+    const finish = () => {
+      if (finished) return
+      finished = true
+      if (progressInterval) clearInterval(progressInterval)
+      setLoadingProgress(100)
+      setIsVideoLoading(false)
+      video.play().catch(() => {})
     }
-  }
+
+    // If video is already playable (cached), skip the indicator entirely.
+    if (video.readyState >= 3) {
+      finish()
+      return
+    }
+
+    progressInterval = setInterval(() => {
+      setLoadingProgress(prev => (prev >= 90 ? prev : prev + Math.random() * 15))
+    }, 200)
+
+    // Safety net: never leave the indicator up more than 6s.
+    const safety = setTimeout(finish, 6000)
+
+    video.addEventListener('canplay', finish)
+    video.addEventListener('loadeddata', finish)
+    video.addEventListener('playing', finish)
+
+    return () => {
+      if (progressInterval) clearInterval(progressInterval)
+      clearTimeout(safety)
+      video.removeEventListener('canplay', finish)
+      video.removeEventListener('loadeddata', finish)
+      video.removeEventListener('playing', finish)
+    }
+  }, [])
 
   return (
     <>
@@ -54,14 +70,14 @@ export default function Home() {
 
       <div className="background-container">
         <video
+          ref={videoRef}
           autoPlay
           muted
           loop
           playsInline
+          preload="auto"
           className="background-video"
           id="background-video"
-          onLoadStart={handleVideoLoadStart}
-          onCanPlay={handleVideoCanPlay}
         >
           <source src="/assets/Helenfull.mp4" type="video/mp4" id="video-source" />
           Your browser does not support HTML5 video.
