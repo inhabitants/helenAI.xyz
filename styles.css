@@ -1,948 +1,654 @@
-/* Configurações gerais */
+/* ------------------------------------------------------------------
+   Helen Ailith — editorial layout
+   Palette: ivory / ink / single accent
+------------------------------------------------------------------ */
+
+:root {
+    --ink: #0f0f10;
+    --ink-soft: rgba(15, 15, 16, 0.72);
+    --ivory: #f4efe7;
+    --ivory-soft: rgba(244, 239, 231, 0.88);
+    --line: rgba(244, 239, 231, 0.22);
+    --line-strong: rgba(244, 239, 231, 0.55);
+    --accent: #1ed760;
+    --serif: 'Fraunces', 'Times New Roman', serif;
+    --sans: 'Inter', system-ui, -apple-system, sans-serif;
+    --mono: 'JetBrains Mono', 'SF Mono', Menlo, monospace;
+}
+
+* {
+    box-sizing: border-box;
+}
+
 body {
-    font-family: 'August BOLD', sans-serif;
-    color: black;
+    font-family: var(--sans);
+    color: var(--ivory);
     margin: 0;
     padding: 0;
     overflow: hidden;
     position: relative;
+    background: var(--ink);
+    font-weight: 300;
+    letter-spacing: 0.01em;
+    -webkit-font-smoothing: antialiased;
 }
 
-/* Camada branca semi-transparente */
-body::before {
-    content: '';
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(255, 255, 255, 0.3); /* Branco suave */
-    z-index: -1;
+a {
+    color: inherit;
+    text-decoration: none;
 }
 
-/* Fundo do vídeo e imagem */
+/* ------------------------------------------------------------------
+   Background video + vignette
+------------------------------------------------------------------ */
+
 .background-container {
     position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
+    inset: 0;
     z-index: -2;
+    background: var(--ink);
 }
 
 .background-video {
     display: block;
     width: 100%;
     height: 100%;
-    object-fit: cover; /* Ajusta o vídeo sem distorção */
+    object-fit: cover;
 }
 
 .background-image {
     display: none;
     width: 100%;
     height: 100%;
-    object-fit: cover; /* Ajusta a imagem sem distorção */
+    object-fit: cover;
+}
+
+.background-vignette {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: -1;
+    background:
+        radial-gradient(ellipse at center, rgba(15, 15, 16, 0) 40%, rgba(15, 15, 16, 0.55) 100%),
+        linear-gradient(180deg, rgba(15, 15, 16, 0.35) 0%, rgba(15, 15, 16, 0) 18%, rgba(15, 15, 16, 0) 72%, rgba(15, 15, 16, 0.65) 100%);
 }
 
 @media (max-width: 768px) {
-    .background-video {
-        display: none;
-    }
-    .background-image {
-        display: block;
-    }
+    .background-video { display: none; }
+    .background-image { display: block; }
 }
 
-/* Botão "Entrar" no canto superior direito */
-#enter-button {
-    position: fixed;
-    top: 20px;
-    right: 240px; /* Aumentado significativamente o espaçamento */
-    background: #0057ff; /* Cor do Behance */
-    color: white;
-    padding: 10px 20px; /* Reduzido ligeiramente o padding horizontal */
-    text-decoration: none;
-    font-family: 'August BOLD', sans-serif; /* Fonte igual ao resto */
-    border-radius: 10px; /* Bordas mais suaves */
-    font-size: 1.2rem;
-    font-weight: bold;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra leve */
-    border: 2px solid transparent; /* Sem borda visível por padrão */
-    display: inline-flex; /* Usa flexbox para alinhar ícone e texto */
-    align-items: center; /* Centraliza verticalmente */
-    justify-content: center; /* Centraliza horizontalmente */
-    gap: 5px; /* Espaço entre o ícone e o texto */
-    transition: all 0.3s ease;
-    z-index: 10;
-    height: 25px; /* Define altura consistente para o botão */
-}
+/* ------------------------------------------------------------------
+   Masthead (top bar)
+------------------------------------------------------------------ */
 
-/* Hover e efeito */
-#enter-button:hover {
-    background: #003ecb; /* Cor de destaque no hover */
-    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.2); /* Sombra mais forte no hover */
-    transform: scale(1.05); /* Leve aumento no hover */
-}
-
-#enter-button:active {
-    background: #0057ff; /* Mantém a cor do Behance ao clicar */
-    animation: bounce 0.5s ease; /* Animação de bounce */
-}
-
-/* Ícone fixo à esquerda */
-#enter-button::before {
-    content: '🎨'; /* Ícone de paleta de cores */
-    font-size: 1.rem; /* Tamanho do ícone ajustado */
-    display: inline-block;
-    vertical-align: middle; /* Alinha o ícone com o texto */
-}
-
-/* Animação de bounce */
-@keyframes bounce {
-    0% {
-        transform: translateX(0);
-    }
-    25% {
-        transform: translateX(-10px);
-    }
-    50% {
-        transform: translateX(10px);
-    }
-    75% {
-        transform: translateX(-5px);
-    }
-    100% {
-        transform: translateX(0);
-    }
-}
-
-
-/* Links na lateral esquerda */
-.side-links {
-    position: fixed;
-    top: 50%;
-    left: 20px; /* Mantém os links próximos à borda esquerda */
-    transform: translateY(-50%); /* Centraliza os links verticalmente */
-    display: flex;
-    flex-direction: column; /* Organiza os itens verticalmente */
-    gap: 30px; /* Espaço maior entre os links */
-    z-index: 10;
-}
-
-.side-link {
-    text-decoration: none;
-    display: flex;
-    align-items: center;
-    transition: transform 0.3s ease;
-}
-
-.side-link:hover {
-    transform: scale(1.1); /* Leve aumento ao passar o mouse */
-}
-
-/* Ícones uniformes */
-.icon {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 5rem; /* Define largura fixa */
-    height: 5rem; /* Define altura fixa */
-    font-size: 3rem; /* Ajusta o tamanho do ícone para igualar ao Discord */
-    text-align: center;
-    line-height: 5rem; /* Centraliza o texto verticalmente */
-}
-
-.icon-image {
-    width: 4rem; /* Largura igual ao ícone de texto */
-    height: 4rem; /* Altura igual ao ícone de texto */
-    display: inline-block;
-    object-fit: contain; /* Ajusta o tamanho da imagem sem distorcer */
-    vertical-align: middle;
-}
-
-/* Seção do herói */
-#hero {
+.masthead {
     position: fixed;
     top: 0;
     left: 0;
-    width: 100vw; /* Garante que o contêiner ocupe toda a largura da tela */
-    height: 100vh; /* Garante que o contêiner ocupe toda a altura da tela */
+    right: 0;
+    padding: 26px 40px 18px;
     display: flex;
-    align-items: center; /* Centraliza verticalmente */
-    justify-content: center; /* Centraliza horizontalmente */
-    overflow: hidden; /* Evita barras de rolagem */
-    z-index: -1; /* Mantém a imagem em segundo plano */
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+    z-index: 20;
+    color: var(--ivory);
 }
 
-/* Imagem do herói */
+.masthead::after {
+    content: '';
+    position: absolute;
+    left: 40px;
+    right: 40px;
+    bottom: 0;
+    height: 1px;
+    background: var(--line);
+}
+
+.masthead-left {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    font-family: var(--mono);
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.22em;
+}
+
+.kicker {
+    font-family: var(--serif);
+    font-weight: 400;
+    font-style: italic;
+    font-size: 15px;
+    letter-spacing: 0.02em;
+    text-transform: none;
+}
+
+.kicker-divider {
+    width: 24px;
+    height: 1px;
+    background: var(--line-strong);
+    display: inline-block;
+}
+
+.kicker-meta {
+    opacity: 0.7;
+}
+
+.masthead-nav {
+    display: flex;
+    align-items: center;
+    gap: 28px;
+}
+
+.nav-link {
+    font-family: var(--mono);
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.22em;
+    color: var(--ivory);
+    opacity: 0.7;
+    transition: opacity 0.25s ease;
+    padding: 4px 0;
+    position: relative;
+}
+
+.nav-link:hover {
+    opacity: 1;
+}
+
+.nav-link-primary {
+    opacity: 1;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 14px;
+    border: 1px solid var(--line-strong);
+    border-radius: 999px;
+    transition: background 0.3s ease, border-color 0.3s ease;
+}
+
+.nav-link-primary:hover {
+    background: var(--ivory);
+    color: var(--ink);
+    border-color: var(--ivory);
+}
+
+.nav-link-primary:hover .nav-dot {
+    background: var(--ink);
+}
+
+.nav-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--accent);
+    display: inline-block;
+    animation: dot-pulse 2.4s ease-in-out infinite;
+}
+
+@keyframes dot-pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.5; transform: scale(0.7); }
+}
+
+/* ------------------------------------------------------------------
+   Hero
+------------------------------------------------------------------ */
+
+main { position: relative; }
+
+#hero {
+    position: fixed;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    z-index: -1;
+    pointer-events: none;
+}
+
 .hero-image {
     position: absolute;
-    top: 60%; /* Centraliza verticalmente */
-    left: 50%; /* Centraliza horizontalmente */
-    transform: translate(-50%, -50%); /* Garante que a imagem esteja perfeitamente centralizada */
-    width: 150%; /* Ajusta automaticamente a largura */
-    height: 105%; /* Ajusta automaticamente a altura */
-    max-width: 120vw; /* Faz a imagem ficar maior que a largura da tela */
-    max-height: 120vh; /* Faz a imagem ficar maior que a altura da tela */
-    object-fit: contain; /* Garante que a imagem inteira seja exibida sem cortar */
-    opacity: 0.7; /* Adiciona transparência */
-    transition: all 0.3s ease; /* Transição suave para ajustes */
-}
-/* Ajuste para dispositivos móveis */
-/* Ajuste para dispositivos móveis */
-@media (max-width: 768px) {
-    .background-video {
-        display: none; /* Oculta o vídeo no mobile */
-    }
-
-    .background-image {
-        display: block; /* Exibe a imagem no mobile */
-    }
-
-    .hero-image {
-        content: url("/assets/helenai_m.png"); /* Substitui pela imagem móvel */
-        width: 80%; /* Reduzido em 15% */
-        height: auto;
-        max-width: 100%;
-        max-height: 100%;
-        position: absolute;
-        top: 55%; /* Posicionado verticalmente */
-        left: 55%; /* Posicionado horizontalmente */
-        transform: translate(-50%, -50%);
-    }
-
-    #enter-button {
-        position: fixed;
-        top: 10px; /* Próximo ao topo */
-        left: 50%; /* Centraliza horizontalmente */
-        transform: translateX(-50%); /* Alinha perfeitamente no centro */
-        background: #0057ff; /* Cor do Behance */
-        color: white;
-        padding: 5px 15px; /* Espaçamento interno menor */
-        text-decoration: none;
-        font-family: 'August BOLD', sans-serif;
-        border-radius: 8px; /* Bordas arredondadas */
-        font-size: 1rem; /* Tamanho menor do texto */
-        font-weight: bold;
-        z-index: 10;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        max-width: 120px; /* Aumenta a largura máxima para caber "Portfólio" */
-        width: auto; /* Permite ajuste dinâmico */
-        transition: all 0.3s ease;
-    }
-    
-
-    .side-links {
-        position: fixed;
-        bottom: 5px; /* Mantém os links no canto inferior */
-        left: 50%; /* Centraliza horizontalmente */
-        top: auto; /* Remove o alinhamento vertical anterior */
-        transform: translateX(-50%); /* Centraliza os links horizontalmente */
-        display: flex;
-        flex-direction: row; /* Alinha os ícones horizontalmente */
-        gap: 32px; /* Menor espaçamento entre os ícones */
-        z-index: 9998; /* Menor que o player (9999) mas ainda alto */
-    }
-    
-    .side-link {
-        transform: none; /* Remove animação de escala */
-    }
-
-    .icon, .icon-image {
-        width: 2.2rem; /* Reduzido em 40% (6rem * 0.6) */
-        height: 2.2rem;
-        font-size: 1.8rem; /* Ajuste proporcional ao ícone de texto */
-    }
-
-    body::before {
-        background: rgba(255, 255, 255, 0.3); /* Mantém a camada branca */
-    }
+    top: 60%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 150%;
+    height: 105%;
+    max-width: 120vw;
+    max-height: 120vh;
+    object-fit: contain;
+    opacity: 0.55;
+    mix-blend-mode: screen;
+    transition: opacity 0.4s ease;
 }
 
-.powered-by {
+/* ------------------------------------------------------------------
+   Side social links
+------------------------------------------------------------------ */
+
+.side-links {
     position: fixed;
-    bottom: 10px;
-    right: 10px;
-    color: white;
-    font-size: 14px;
-    font-family: 'Roboto', sans-serif;
-    z-index: 100;
+    top: 50%;
+    right: 32px;
+    transform: translateY(-50%);
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    z-index: 15;
 }
 
-.powered-by a {
-    color: #a0a0ff;
-    text-decoration: none;
-    transition: color 0.3s ease;
-}
-
-.powered-by a:hover {
-    color: #ffffff;
-    text-decoration: underline;
-}
-
-/* Ajuste do powered-by para dispositivos móveis */
-@media (max-width: 768px) {
-    .powered-by {
-        bottom: 45px; /* Posicionado acima dos links sociais (que estão em bottom: 5px) */
-        left: 50%; 
-        right: auto; /* Remove posicionamento à direita */
-        transform: translateX(-50%); /* Centraliza */
-        text-align: center; /* Centraliza o texto */
-        width: auto; /* Permite que o texto se ajuste naturalmente */
-        font-size: 12px; /* Texto ligeiramente menor no mobile */
-    }
-}
-
-/* Botão "My Comic" lúdico */
-#comic-button {
-    position: fixed;
-    top: 20px;
-    right: 20px; /* Posicionado no canto superior direito */
-    background: linear-gradient(45deg, #ff5b8f, #ff8e6e); /* Gradiente lúdico e colorido */
-    color: white;
-    padding: 10px 25px;
-    text-decoration: none;
-    font-family: 'August BOLD', sans-serif;
-    border-radius: 15px; /* Bordas mais arredondadas */
-    font-size: 1.2rem;
-    font-weight: bold;
-    box-shadow: 0 4px 10px rgba(255, 91, 143, 0.4); /* Sombra colorida */
-    border: 2px solid #ffcbe0; /* Borda suave */
+.side-link {
     display: inline-flex;
     align-items: center;
-    justify-content: center;
-    gap: 5px;
-    transition: all 0.3s ease;
-    z-index: 10;
-    animation: float 3s ease-in-out infinite; /* Animação de flutuação */
-    height: 25px;
+    gap: 12px;
+    font-family: var(--mono);
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    color: var(--ivory);
+    opacity: 0.72;
+    transition: opacity 0.25s ease, transform 0.3s ease;
+    padding: 6px 10px 6px 12px;
+    border: 1px solid transparent;
+    border-radius: 999px;
+    justify-content: flex-end;
 }
 
-/* Hover e efeito para o botão My Comic */
-#comic-button:hover {
-    background: linear-gradient(45deg, #ff8e6e, #ff5b8f); /* Gradiente invertido no hover */
-    box-shadow: 0 6px 15px rgba(255, 91, 143, 0.6); /* Sombra mais forte no hover */
-    transform: scale(1.05) rotate(-2deg); /* Leve aumento e rotação no hover */
+.side-link:hover {
+    opacity: 1;
+    border-color: var(--line);
 }
 
-#comic-button:active {
-    animation: wobble 0.5s ease; /* Animação de wobble ao clicar */
+.icon-image {
+    width: 16px;
+    height: 16px;
+    object-fit: contain;
+    filter: invert(1) brightness(1.2);
+    opacity: 0.85;
 }
 
-/* Ícone para o botão My Comic */
-#comic-button::before {
-    content: '📚'; /* Ícone de livros/quadrinhos */
-    font-size: 1.2rem;
+.side-link-label {
     display: inline-block;
-    vertical-align: middle;
 }
 
-/* Animação de flutuação */
-@keyframes float {
-    0% {
-        transform: translateY(0px);
-    }
-    50% {
-        transform: translateY(-10px);
-    }
-    100% {
-        transform: translateY(0px);
-    }
-}
+/* ------------------------------------------------------------------
+   Volume pill (top-left)
+------------------------------------------------------------------ */
 
-/* Animação wobble */
-@keyframes wobble {
-    0% {
-        transform: rotate(0);
-    }
-    25% {
-        transform: rotate(-5deg);
-    }
-    50% {
-        transform: rotate(5deg);
-    }
-    75% {
-        transform: rotate(-3deg);
-    }
-    100% {
-        transform: rotate(0);
-    }
-}
-
-/* Botão Chat com Helen */
-#chat-button {
-    position: fixed;
-    bottom: 60px;
-    right: 20px;
-    background: #ff4081;
-    color: white;
-    padding: 12px 18px;
-    text-decoration: none;
-    font-family: 'August BOLD', sans-serif;
-    border-radius: 20px;
-    font-size: 1.2rem;
-    font-weight: bold;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: 5px;
-    transition: all 0.3s ease;
-    z-index: 9999;
-    height: 30px;
-}
-
-#chat-button:hover {
-    background: #e91e63;
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
-    transform: scale(1.05);
-}
-
-#chat-button:active {
-    animation: pulse 0.5s ease;
-}
-
-#chat-button::before {
-    content: '💬';
-    font-size: 1rem;
-    display: inline-block;
-    vertical-align: middle;
-    margin-right: 5px;
-}
-
-/* Animação de brilho pulsante para o botão de volume */
-@keyframes glow-pulse {
-    0% {
-        box-shadow: 
-            0 4px 20px rgba(0, 0, 0, 0.3),
-            0 0 0 1px rgba(255, 255, 255, 0.1),
-            inset 0 1px 0 rgba(255, 255, 255, 0.1),
-            0 0 20px rgba(30, 215, 96, 0.4),
-            0 0 30px rgba(30, 215, 96, 0.2);
-    }
-    50% {
-        box-shadow: 
-            0 4px 20px rgba(0, 0, 0, 0.3),
-            0 0 0 1px rgba(255, 255, 255, 0.1),
-            inset 0 1px 0 rgba(255, 255, 255, 0.1),
-            0 0 30px rgba(30, 215, 96, 0.6),
-            0 0 50px rgba(30, 215, 96, 0.4),
-            0 0 70px rgba(30, 215, 96, 0.2);
-    }
-    100% {
-        box-shadow: 
-            0 4px 20px rgba(0, 0, 0, 0.3),
-            0 0 0 1px rgba(255, 255, 255, 0.1),
-            inset 0 1px 0 rgba(255, 255, 255, 0.1),
-            0 0 20px rgba(30, 215, 96, 0.4),
-            0 0 30px rgba(30, 215, 96, 0.2);
-    }
-}
-
-/* Botão de Volume para Vídeo de Background - Apenas Desktop */
 .volume-button {
     position: fixed;
-    top: 30px;
-    left: 30px; /* Movido para canto superior esquerdo */
-    z-index: 9999;
-    width: 50px;
-    height: 50px;
-    background: linear-gradient(135deg, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.5));
-    border: none;
-    border-radius: 50%;
-    color: white;
-    font-size: 20px;
-    cursor: pointer;
-    display: flex;
+    bottom: 32px;
+    right: 32px;
+    z-index: 30;
+    display: inline-flex;
     align-items: center;
-    justify-content: center;
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    backdrop-filter: blur(10px);
-    box-shadow: 
-        0 4px 20px rgba(0, 0, 0, 0.3),
-        0 0 0 1px rgba(255, 255, 255, 0.1),
-        inset 0 1px 0 rgba(255, 255, 255, 0.1),
-        0 0 20px rgba(30, 215, 96, 0.4),
-        0 0 30px rgba(30, 215, 96, 0.2);
-    outline: none;
-    animation: glow-pulse 2s ease-in-out infinite;
+    gap: 10px;
+    padding: 10px 14px;
+    background: rgba(15, 15, 16, 0.55);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    color: var(--ivory);
+    font-family: var(--mono);
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.22em;
+    cursor: pointer;
+    transition: background 0.3s ease, border-color 0.3s ease, color 0.3s ease;
 }
 
 .volume-button:hover {
-    background: linear-gradient(135deg, rgba(30, 215, 96, 0.8), rgba(30, 215, 96, 0.6));
-    transform: scale(1.1) rotate(5deg);
-    box-shadow: 
-        0 6px 25px rgba(30, 215, 96, 0.4),
-        0 0 0 1px rgba(30, 215, 96, 0.3),
-        inset 0 1px 0 rgba(255, 255, 255, 0.2),
-        0 0 40px rgba(30, 215, 96, 0.8),
-        0 0 60px rgba(30, 215, 96, 0.5);
-    animation: none; /* Para a animação pulsante no hover */
+    background: var(--ivory);
+    color: var(--ink);
+    border-color: var(--ivory);
 }
 
-.volume-button:active {
-    transform: scale(0.95);
-    transition: transform 0.1s ease;
+.volume-glyph {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
 }
 
-.volume-button:focus {
-    outline: 2px solid rgba(30, 215, 96, 0.5);
-    outline-offset: 2px;
+/* ------------------------------------------------------------------
+   Spotify — editorial player (centerpiece)
+------------------------------------------------------------------ */
+
+.spotify-player {
+    position: fixed;
+    left: 50%;
+    bottom: 56px;
+    transform: translateX(-50%);
+    width: min(560px, calc(100vw - 64px));
+    z-index: 25;
+    background: rgba(15, 15, 16, 0.72);
+    backdrop-filter: blur(22px);
+    -webkit-backdrop-filter: blur(22px);
+    border: 1px solid var(--line);
+    border-radius: 2px;
+    color: var(--ivory);
+    overflow: hidden;
+    transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.4s ease;
+    box-shadow: 0 30px 80px rgba(0, 0, 0, 0.45);
 }
 
-/* Responsivo para mobile - Ocultar botão de volume */
-@media (max-width: 768px) {
-    .volume-button {
-        display: none; /* Oculto no mobile pois não há vídeo */
-    }
+.spotify-player.expanded {
+    width: min(640px, calc(100vw - 64px));
 }
 
-/* Indicador de Carregamento do Vídeo */
+.spotify-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    padding: 14px 18px;
+    border-bottom: 1px solid var(--line);
+}
+
+.spotify-eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    font-family: var(--mono);
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.24em;
+    opacity: 0.9;
+}
+
+.spotify-eyebrow-label {
+    color: var(--accent);
+}
+
+.spotify-eyebrow-dot {
+    width: 3px;
+    height: 3px;
+    background: var(--line-strong);
+    border-radius: 50%;
+    display: inline-block;
+}
+
+.spotify-eyebrow-value {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 13px;
+    letter-spacing: 0.02em;
+    text-transform: none;
+    opacity: 1;
+}
+
+.spotify-actions {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.spotify-link {
+    font-family: var(--mono);
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.22em;
+    color: var(--ivory);
+    opacity: 0.8;
+    transition: opacity 0.25s ease;
+    padding: 6px 0;
+}
+
+.spotify-link:hover {
+    opacity: 1;
+}
+
+.spotify-toggle {
+    width: 28px;
+    height: 28px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: transparent;
+    color: var(--ivory);
+    border: 1px solid var(--line-strong);
+    border-radius: 50%;
+    font-family: var(--serif);
+    font-size: 16px;
+    line-height: 1;
+    cursor: pointer;
+    transition: background 0.25s ease, color 0.25s ease;
+}
+
+.spotify-toggle:hover {
+    background: var(--ivory);
+    color: var(--ink);
+}
+
+.spotify-content {
+    padding: 10px 10px 12px;
+}
+
+.spotify-content iframe {
+    display: block;
+    width: 100%;
+    border: none;
+    border-radius: 6px;
+}
+
+/* ------------------------------------------------------------------
+   Loading indicator
+------------------------------------------------------------------ */
+
 .video-loading-indicator {
     position: fixed;
-    bottom: 30px;
-    right: 30px;
-    z-index: 9998;
-    background: linear-gradient(135deg, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.6));
-    backdrop-filter: blur(15px);
-    border-radius: 12px;
-    padding: 20px;
-    box-shadow: 
-        0 8px 32px rgba(0, 0, 0, 0.3),
-        0 0 0 1px rgba(255, 255, 255, 0.1),
-        inset 0 1px 0 rgba(255, 255, 255, 0.1);
-    animation: slideInUp 0.3s ease-out;
-    max-width: 250px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 40;
+    background: rgba(15, 15, 16, 0.85);
+    backdrop-filter: blur(14px);
+    border: 1px solid var(--line);
+    padding: 20px 24px;
+    min-width: 220px;
+    font-family: var(--mono);
+    color: var(--ivory);
+    animation: loading-fade 0.3s ease-out;
 }
 
 .loading-content {
     display: flex;
     flex-direction: column;
-    align-items: center;
     gap: 12px;
-    color: white;
-    font-family: 'August BOLD', sans-serif;
-}
-
-.loading-spinner {
-    width: 30px;
-    height: 30px;
-    border: 3px solid rgba(255, 255, 255, 0.2);
-    border-top: 3px solid rgba(30, 215, 96, 0.8);
-    border-radius: 50%;
-    animation: spin 1s linear infinite;
+    align-items: flex-start;
 }
 
 .loading-text {
-    font-size: 14px;
-    font-weight: 500;
-    color: rgba(255, 255, 255, 0.9);
-    text-align: center;
+    font-size: 10px;
+    letter-spacing: 0.3em;
+    opacity: 0.75;
 }
 
 .loading-progress {
     width: 100%;
-    height: 4px;
-    background: rgba(255, 255, 255, 0.2);
-    border-radius: 2px;
+    height: 1px;
+    background: var(--line);
     overflow: hidden;
-    position: relative;
 }
 
 .loading-progress-bar {
     height: 100%;
-    background: linear-gradient(90deg, rgba(30, 215, 96, 0.8), rgba(30, 215, 96, 1));
-    border-radius: 2px;
+    background: var(--ivory);
     transition: width 0.3s ease;
-    position: relative;
-}
-
-.loading-progress-bar::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
-    animation: shimmer 1.5s infinite;
 }
 
 .loading-percentage {
-    font-size: 12px;
-    font-weight: bold;
-    color: rgba(30, 215, 96, 0.9);
-    text-align: center;
-    min-width: 40px;
-}
-
-/* Animações */
-@keyframes spin {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
-}
-
-@keyframes slideInUp {
-    from {
-        opacity: 0;
-        transform: translateY(20px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-@keyframes shimmer {
-    0% { transform: translateX(-100%); }
-    100% { transform: translateX(100%); }
-}
-
-/* Responsivo para mobile - Indicador de carregamento */
-@media (max-width: 768px) {
-    .video-loading-indicator {
-        bottom: 20px;
-        right: 20px;
-        left: 20px;
-        max-width: none;
-        padding: 15px;
-    }
-    
-    .loading-content {
-        gap: 10px;
-    }
-    
-    .loading-spinner {
-        width: 25px;
-        height: 25px;
-        border-width: 2px;
-    }
-    
-    .loading-text {
-        font-size: 13px;
-    }
-    
-    .loading-percentage {
-        font-size: 11px;
-    }
-}
-
-/* Player do Spotify - Miniplayer Desktop */
-.spotify-player {
-    position: fixed;
-    bottom: 30px;
-    left: 30px;
-    z-index: 9999;
-    display: flex;
-    flex-direction: column;
-    border-radius: 16px;
-    overflow: hidden;
-    backdrop-filter: blur(10px);
-    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-    box-shadow: 
-        0 8px 32px rgba(0, 0, 0, 0.3),
-        0 0 0 1px rgba(255, 255, 255, 0.1),
-        inset 0 1px 0 rgba(255, 255, 255, 0.1);
-}
-
-/* Estado colapsado - Desktop (Miniplayer funcional) */
-.spotify-player.collapsed {
-    width: 320px;
-    height: 152px; /* Altura padrão do embed compacto do Spotify */
-    background: linear-gradient(135deg, rgba(30, 215, 96, 0.1), rgba(0, 0, 0, 0.3));
-    padding: 12px;
-}
-
-/* Estado expandido - Desktop (Player grande) */
-.spotify-player.expanded {
-    width: 400px;
-    height: 470px;
-    background: linear-gradient(135deg, rgba(30, 215, 96, 0.1), rgba(0, 0, 0, 0.3));
-    padding: 15px;
-}
-
-.spotify-player:hover {
-    transform: scale(1.02) translateY(-3px);
-    backdrop-filter: blur(15px);
-    box-shadow: 
-        0 12px 40px rgba(0, 0, 0, 0.4),
-        0 0 0 1px rgba(30, 215, 96, 0.3),
-        inset 0 1px 0 rgba(255, 255, 255, 0.2);
-}
-
-/* Botão de toggle - Desktop */
-.spotify-toggle {
-    display: none; /* Oculto por padrão no desktop */
-    align-items: center;
-    justify-content: space-between;
-    width: 100%;
-    height: 40px;
-    padding: 0 15px;
-    background: rgba(0, 0, 0, 0.3);
-    border: none;
-    color: white;
-    font-family: inherit;
-    font-size: 12px;
-    font-weight: 500;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    outline: none;
-    border-radius: 8px;
-    margin-bottom: 8px;
-}
-
-/* Mostrar botão apenas quando expandido no desktop */
-.spotify-player.expanded .spotify-toggle {
-    display: flex;
-}
-
-.spotify-toggle:hover {
-    background: rgba(30, 215, 96, 0.2);
-}
-
-.spotify-toggle:focus {
-    background: rgba(30, 215, 96, 0.25);
-    outline: 2px solid rgba(30, 215, 96, 0.5);
-    outline-offset: -2px;
-}
-
-.spotify-icon {
-    font-size: 16px;
-    margin-right: 8px;
-}
-
-.spotify-text {
-    flex: 1;
-    text-align: left;
-}
-
-.spotify-arrow {
+    align-self: flex-end;
     font-size: 10px;
-    opacity: 0.7;
-    transition: transform 0.3s ease;
+    letter-spacing: 0.24em;
+    opacity: 0.9;
 }
 
-/* Botão de expansão no miniplayer */
-.spotify-expand-btn {
-    position: absolute;
-    top: 8px;
-    right: 8px;
-    width: 24px;
-    height: 24px;
-    background: rgba(0, 0, 0, 0.5);
-    border: none;
-    border-radius: 50%;
-    color: white;
-    font-size: 12px;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: all 0.3s ease;
-    opacity: 0.7;
+@keyframes loading-fade {
+    from { opacity: 0; }
+    to { opacity: 1; }
 }
 
-.spotify-expand-btn:hover {
-    background: rgba(30, 215, 96, 0.8);
-    opacity: 1;
-    transform: scale(1.1);
-}
+/* ------------------------------------------------------------------
+   Powered by
+------------------------------------------------------------------ */
 
-.spotify-player.expanded .spotify-expand-btn {
-    display: none;
-}
-
-/* Conteúdo do player */
-.spotify-content {
-    flex: 1;
-    padding-top: 15px;
-    animation: fadeIn 0.3s ease-in-out;
-}
-
-.spotify-content iframe {
-    border-radius: 12px;
-    width: 100%;
-    height: 100%;
-    border: none;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
-}
-
-@keyframes fadeIn {
-    from {
-        opacity: 0;
-        transform: translateY(10px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-/* Ajustes responsivos para dispositivos móveis */
-@media (max-width: 768px) {
-    #enter-button {
-        top: 10px;
-        left: 10px; /* Posicionado no canto superior esquerdo */
-        right: auto; /* Remove o posicionamento à direita */
-        transform: none; /* Remove a transformação */
-        font-size: 0.9rem;
-        padding: 6px 15px;
-        height: 20px;
-    }
-
-    #comic-button {
-        top: 10px;
-        right: 10px; /* Mantém no canto direito */
-        font-size: 0.9rem;
-        padding: 6px 15px;
-        height: 20px;
-        animation: none; /* Remove a animação em dispositivos móveis */
-    }
-    
-    /* Botão Chat com Helen - Mobile */
-    #chat-button {
-        position: fixed;
-        bottom: 85px; /* Posicionado acima do powered-by */
-        left: 50%;
-        transform: translateX(-50%);
-        top: auto;
-        right: auto;
-        font-size: 0.9rem;
-        padding: 6px 15px;
-        height: 20px;
-    }
-    #chat-button:active {
-        animation: none !important;
-    }
-
-    /* Player do Spotify - Gaveta Expansível - Mobile */
-    .spotify-player {
-        top: 80px;
-        bottom: auto;
-        left: 50%;
-        transform: translateX(-50%);
-        border-radius: 12px;
-        backdrop-filter: blur(8px);
-        box-shadow: 
-            0 6px 25px rgba(0, 0, 0, 0.2),
-            0 0 0 1px rgba(255, 255, 255, 0.05);
-        opacity: 0.95;
-        transition: all 0.3s ease;
-    }
-    
-    /* Estado colapsado - Mobile (Gaveta fechada) */
-    .spotify-player.collapsed {
-        width: 180px;
-        height: 50px;
-        background: linear-gradient(135deg, rgba(30, 215, 96, 0.08), rgba(0, 0, 0, 0.2));
-    }
-    
-    /* Estado expandido - Mobile (Gaveta aberta) */
-    .spotify-player.expanded {
-        width: calc(100vw - 40px);
-        max-width: 350px;
-        height: 420px;
-        background: linear-gradient(135deg, rgba(30, 215, 96, 0.08), rgba(0, 0, 0, 0.2));
-        padding: 12px;
-    }
-    
-    .spotify-player:hover {
-        transform: translateX(-50%) scale(1.01);
-        opacity: 1;
-    }
-    
-    /* Botão toggle - Mobile (sempre visível) */
-    .spotify-toggle {
-        display: flex !important; /* Forçar exibição no mobile */
-        height: 50px;
-        padding: 0 15px;
-        font-size: 13px;
-        background: transparent !important;
-        margin-bottom: 0;
-    }
-    
-    .spotify-icon {
-        font-size: 18px;
-        margin-right: 8px;
-    }
-    
-    /* Ocultar botão de expansão no mobile */
-    .spotify-expand-btn {
-        display: none !important;
-    }
-    
-    /* Conteúdo do player - Mobile */
-    .spotify-content {
-        padding-top: 12px;
-        display: none; /* Oculto por padrão no mobile */
-    }
-    
-    /* Mostrar conteúdo apenas quando expandido no mobile */
-    .spotify-player.expanded .spotify-content {
-        display: block;
-    }
-    
-    .spotify-content iframe {
-        border-radius: 8px;
-        box-shadow: 0 2px 15px rgba(0, 0, 0, 0.15);
-    }
-    
-    /* Powered by foi movido para uma media query específica acima */
-}
-
-/* Animação de carregamento */
-.loading-indicator {
+.powered-by {
     position: fixed;
     bottom: 20px;
-    right: 20px;
-    background-color: rgba(0, 0, 0, 0.5);
-    color: white;
-    border-radius: 20px;
-    padding: 8px 16px;
-    font-size: 12px;
-    z-index: 9999;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-family: 'Roboto', sans-serif;
-    backdrop-filter: blur(3px);
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-    letter-spacing: 1px;
+    left: 40px;
+    z-index: 20;
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: rgba(244, 239, 231, 0.55);
 }
 
-.loading-indicator::after {
-    content: '';
-    position: relative;
-    width: 6px;
-    height: 6px;
-    margin-left: 8px;
-    border-radius: 50%;
-    background-color: white;
-    animation: pulse 1.5s infinite ease-in-out;
+.powered-by p { margin: 0; }
+
+.powered-by a {
+    color: var(--ivory);
+    opacity: 0.8;
+    transition: opacity 0.25s ease;
 }
 
-@keyframes pulse {
-    0% {
-        transform: scale(0.3);
-        opacity: 0.2;
-    }
-    50% {
-        transform: scale(1);
-        opacity: 1;
-    }
-    100% {
-        transform: scale(0.3);
-        opacity: 0.2;
-    }
+.powered-by a:hover {
+    opacity: 1;
 }
 
-/* Ajuste para dispositivos móveis */
+/* ------------------------------------------------------------------
+   Mobile
+------------------------------------------------------------------ */
+
 @media (max-width: 768px) {
-    .loading-indicator {
-        bottom: 50px;
+    .masthead {
+        padding: 18px 20px 14px;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 14px;
+    }
+
+    .masthead::after {
+        left: 20px;
+        right: 20px;
+    }
+
+    .masthead-left {
+        justify-content: space-between;
+    }
+
+    .masthead-nav {
+        gap: 16px;
+        flex-wrap: wrap;
+        justify-content: flex-start;
+    }
+
+    .nav-link {
         font-size: 10px;
+        letter-spacing: 0.2em;
+    }
+
+    .nav-link-primary {
         padding: 6px 12px;
+    }
+
+    .hero-image {
+        content: url("/assets/helenai_m.png");
+        width: 80%;
+        height: auto;
+        max-width: 100%;
+        max-height: 100%;
+        top: 52%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        opacity: 0.6;
+    }
+
+    .side-links {
+        top: auto;
+        right: auto;
+        bottom: 18px;
+        left: 20px;
+        transform: none;
+        flex-direction: row;
+        gap: 12px;
+    }
+
+    .side-link {
+        padding: 6px 10px;
+        gap: 8px;
+        border: 1px solid var(--line);
+    }
+
+    .side-link-label {
+        display: none;
+    }
+
+    .icon-image {
+        width: 14px;
+        height: 14px;
+    }
+
+    .volume-button {
+        bottom: 18px;
+        right: 20px;
+        padding: 8px 12px;
+    }
+
+    .volume-label {
+        display: none;
+    }
+
+    .spotify-player {
+        bottom: 70px;
+        width: calc(100vw - 40px);
+    }
+
+    .spotify-player.expanded {
+        width: calc(100vw - 40px);
+    }
+
+    .spotify-header {
+        padding: 12px 14px;
+    }
+
+    .spotify-eyebrow-value {
+        font-size: 12px;
+    }
+
+    .spotify-link {
+        font-size: 9px;
+    }
+
+    .powered-by {
+        left: 50%;
+        bottom: 6px;
+        transform: translateX(-50%);
+        font-size: 9px;
+        text-align: center;
+        white-space: nowrap;
+    }
+
+    .video-loading-indicator {
+        min-width: 200px;
+        padding: 16px 20px;
+    }
+}
+
+@media (max-width: 480px) {
+    .masthead-nav {
+        gap: 12px;
+    }
+
+    .spotify-actions {
+        gap: 8px;
+    }
+
+    .spotify-link {
+        letter-spacing: 0.18em;
     }
 }

@@ -3,7 +3,7 @@ import { useState } from 'react'
 
 export default function Home() {
   const [isSpotifyExpanded, setIsSpotifyExpanded] = useState(false)
-  const [isMuted, setIsMuted] = useState(true) // Inicia mutado por padrão
+  const [isMuted, setIsMuted] = useState(true)
   const [isVideoLoading, setIsVideoLoading] = useState(true)
   const [loadingProgress, setLoadingProgress] = useState(0)
 
@@ -22,8 +22,7 @@ export default function Home() {
   const handleVideoLoadStart = () => {
     setIsVideoLoading(true)
     setLoadingProgress(0)
-    
-    // Simular progresso de carregamento
+
     const progressInterval = setInterval(() => {
       setLoadingProgress(prev => {
         if (prev >= 90) {
@@ -38,8 +37,7 @@ export default function Home() {
   const handleVideoCanPlay = () => {
     setIsVideoLoading(false)
     setLoadingProgress(100)
-    
-    // Garantir que o vídeo toque
+
     const video = document.getElementById('background-video')
     if (video) {
       video.play().catch(error => {
@@ -55,12 +53,12 @@ export default function Home() {
       </Head>
 
       <div className="background-container">
-        <video 
-          autoPlay 
-          muted 
-          loop 
+        <video
+          autoPlay
+          muted
+          loop
           playsInline
-          className="background-video" 
+          className="background-video"
           id="background-video"
           onLoadStart={handleVideoLoadStart}
           onCanPlay={handleVideoCanPlay}
@@ -69,107 +67,141 @@ export default function Home() {
           Seu navegador não suporta vídeos HTML5.
         </video>
         <img src="/assets/helen_m.png" alt="Background estático móvel" className="background-image" />
+        <div className="background-vignette" />
       </div>
 
-      {/* Indicador de carregamento do vídeo */}
       {isVideoLoading && (
         <div className="video-loading-indicator">
           <div className="loading-content">
-            <div className="loading-spinner" />
-            <div className="loading-text">Carregando vídeo...</div>
+            <div className="loading-text">CARREGANDO</div>
             <div className="loading-progress">
-              <div 
-                className="loading-progress-bar" 
+              <div
+                className="loading-progress-bar"
                 style={{ width: `${loadingProgress}%` }}
               />
             </div>
-            <div className="loading-percentage">{Math.round(loadingProgress)}%</div>
+            <div className="loading-percentage">{String(Math.round(loadingProgress)).padStart(2, '0')}</div>
           </div>
         </div>
       )}
 
-      <a href="https://www.behance.net/gallery/221593177/Helen-AI-Brand-Humanizada-Autonoma" className="cta" id="enter-button" target="_blank" rel="noreferrer">
-        Portfólio
-      </a>
-      <a href="https://inhabitants.zone/" className="cta" id="comic-button" target="_blank" rel="noreferrer">
-        My Comic
-      </a>
-      <a href="https://gemini.google.com/gem/1MRTQclEeZXngER33gLM7vJXqxkDiIE3d?usp=sharing" className="cta" id="chat-button" target="_blank" rel="noreferrer">
-        Conversar com Helen
-      </a>
-
-      {/* Botão de volume para o vídeo de background */}
-      <button 
-        type="button"
-        className="volume-button" 
-        onClick={toggleMute}
-        aria-label={isMuted ? 'Ativar som do vídeo' : 'Desativar som do vídeo'}
-        title={isMuted ? 'Ativar som' : 'Desativar som'}
-      >
-        {isMuted ? '🔇' : '🔊'}
-      </button>
-
-      <nav className="side-links">
-        <a href="https://www.behance.net/gallery/221593177/Helen-AI-Brand-Humanizada-Autonoma" className="side-link" title="Portfólio no Behance" target="_blank" rel="noreferrer">
-          <img src="/assets/behance.png" alt="Behance" className="icon-image" />
-        </a>
-        <a href="https://www.tiktok.com/@helenai.wtf" className="side-link" title="TikTok" target="_blank" rel="noreferrer">
-          <img src="/assets/tiktok.png" alt="TikTok" className="icon-image" />
-        </a>
-        <a href="https://discord.gg/pMWaSH4W9b" className="side-link" title="Discord" target="_blank" rel="noreferrer">
-          <img src="/assets/discord.png" alt="Discord" className="icon-image" />
-        </a>
-        <a href="https://x.com/helenai_wtf" className="side-link" title="X" target="_blank" rel="noreferrer">
-          <img src="/assets/x.png" alt="X" className="icon-image" />
-        </a>
-        <a href="https://www.instagram.com/helenai.wtf/" className="side-link" title="Instagram" target="_blank" rel="noreferrer">
-          <img src="/assets/instagram.png" alt="Instagram" className="icon-image" />
-        </a>
-        <a href="https://www.youtube.com/@helenai_wtf" className="side-link" title="YouTube" target="_blank" rel="noreferrer">
-          <img src="/assets/youtube.png" alt="YouTube" className="icon-image" />
-        </a>
-        <a href="https://aitag.app/" className="side-link" title="AITAG" target="_blank" rel="noreferrer">
-          <img src="/assets/tag.png" alt="AITAG" className="icon-image" />
-        </a>
-      </nav>
+      <header className="masthead">
+        <div className="masthead-left">
+          <span className="kicker">Helen Ailith</span>
+          <span className="kicker-divider" />
+          <span className="kicker-meta">MMXXVI</span>
+        </div>
+        <nav className="masthead-nav">
+          <a href="/songs" className="nav-link nav-link-primary">
+            <span className="nav-dot" aria-hidden="true" />
+            Ouvir álbum
+          </a>
+          <a
+            href="https://gemini.google.com/gem/1MRTQclEeZXngER33gLM7vJXqxkDiIE3d?usp=sharing"
+            className="nav-link"
+            target="_blank"
+            rel="noreferrer"
+          >
+            Conversar
+          </a>
+          <a
+            href="https://inhabitants.zone/"
+            className="nav-link"
+            target="_blank"
+            rel="noreferrer"
+          >
+            Quadrinho
+          </a>
+          <a
+            href="https://www.behance.net/gallery/221593177/Helen-AI-Brand-Humanizada-Autonoma"
+            className="nav-link"
+            target="_blank"
+            rel="noreferrer"
+          >
+            Portfólio
+          </a>
+        </nav>
+      </header>
 
       <main>
         <section id="hero">
-          <img src="/assets/helenai.png" alt="HelenAI" className="hero-image" />
+          <img src="/assets/helenai.png" alt="Helen Ailith" className="hero-image" />
         </section>
       </main>
 
-      <div className={`spotify-player ${isSpotifyExpanded ? 'expanded' : 'collapsed'}`}>
-        {/* Botão de toggle (apenas visível quando expandido) */}
-        <button 
-          type="button"
-          className="spotify-toggle" 
-          onClick={toggleSpotify}
-          aria-label="Recolher player do Spotify"
-        >
-          <div className="spotify-icon">🎵</div>
-          <span className="spotify-text">Recolher</span>
-          <div className="spotify-arrow">▼</div>
-        </button>
-        
-        {/* Botão de expansão no miniplayer */}
-        <button 
-          type="button"
-          className="spotify-expand-btn" 
-          onClick={toggleSpotify}
-          aria-label="Expandir player do Spotify"
-          title="Expandir player"
-        >
-          ⤢
-        </button>
-        
-        {/* Conteúdo do player - sempre visível */}
+      <button
+        type="button"
+        className="volume-button"
+        onClick={toggleMute}
+        aria-label={isMuted ? 'Ativar som' : 'Desativar som'}
+        title={isMuted ? 'Ativar som' : 'Desativar som'}
+      >
+        <span className="volume-glyph" aria-hidden="true">
+          {isMuted ? (
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M11 5 6 9H3v6h3l5 4z" />
+              <line x1="22" y1="9" x2="16" y2="15" />
+              <line x1="16" y1="9" x2="22" y2="15" />
+            </svg>
+          ) : (
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M11 5 6 9H3v6h3l5 4z" />
+              <path d="M15.5 8.5a5 5 0 0 1 0 7" />
+              <path d="M18.5 5.5a9 9 0 0 1 0 13" />
+            </svg>
+          )}
+        </span>
+        <span className="volume-label">{isMuted ? 'Som desligado' : 'Som ligado'}</span>
+      </button>
+
+      <nav className="side-links" aria-label="Redes sociais">
+        <a href="https://www.instagram.com/helenai.wtf/" className="side-link" title="Instagram" target="_blank" rel="noreferrer">
+          <img src="/assets/instagram.png" alt="Instagram" className="icon-image" />
+          <span className="side-link-label">Instagram</span>
+        </a>
+        <a href="https://www.youtube.com/@helenai_wtf" className="side-link" title="YouTube" target="_blank" rel="noreferrer">
+          <img src="/assets/youtube.png" alt="YouTube" className="icon-image" />
+          <span className="side-link-label">YouTube</span>
+        </a>
+      </nav>
+
+      <section
+        className={`spotify-player ${isSpotifyExpanded ? 'expanded' : 'collapsed'}`}
+        aria-label="Spotify player"
+      >
+        <div className="spotify-header">
+          <div className="spotify-eyebrow">
+            <span className="spotify-eyebrow-label">Now playing</span>
+            <span className="spotify-eyebrow-dot" aria-hidden="true" />
+            <span className="spotify-eyebrow-value">Helen Ailith</span>
+          </div>
+          <div className="spotify-actions">
+            <a
+              href="/songs"
+              className="spotify-link"
+              target="_blank"
+              rel="noreferrer"
+              title="Abrir no Spotify"
+            >
+              Abrir no Spotify ↗
+            </a>
+            <button
+              type="button"
+              className="spotify-toggle"
+              onClick={toggleSpotify}
+              aria-label={isSpotifyExpanded ? 'Recolher player' : 'Expandir player'}
+              title={isSpotifyExpanded ? 'Recolher' : 'Expandir'}
+            >
+              {isSpotifyExpanded ? '–' : '+'}
+            </button>
+          </div>
+        </div>
+
         <div className="spotify-content">
           <iframe
-            style={{borderRadius: '12px'}}
             src="https://open.spotify.com/embed/album/2rIgJTXSOEt1fcC5pr7lWO?utm_source=generator&theme=0"
             width="100%"
-            height={isSpotifyExpanded ? "400" : "120"}
+            height={isSpotifyExpanded ? '380' : '80'}
             frameBorder="0"
             allowFullScreen=""
             allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
@@ -177,11 +209,14 @@ export default function Home() {
             title="Spotify Embed: Helen AI"
           />
         </div>
-      </div>
+      </section>
 
       <footer className="powered-by">
         <p>
-          Powered by <a href="https://pinto.wtf" target="_blank" rel="noreferrer">PBrasilDAO</a> 🐥 & <a href="https://sapiensinteticos.com" target="_blank" rel="noreferrer">Sapiens Sintéticos</a>
+          Powered by{' '}
+          <a href="https://pinto.wtf" target="_blank" rel="noreferrer">PBrasilDAO</a>{' '}
+          &{' '}
+          <a href="https://sapiensinteticos.com" target="_blank" rel="noreferrer">Sapiens Sintéticos</a>
         </p>
       </footer>
     </>
