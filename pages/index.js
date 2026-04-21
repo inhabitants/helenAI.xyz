@@ -64,16 +64,16 @@ export default function Home() {
           onCanPlay={handleVideoCanPlay}
         >
           <source src="/assets/Helenfull.mp4" type="video/mp4" id="video-source" />
-          Seu navegador não suporta vídeos HTML5.
+          Your browser does not support HTML5 video.
         </video>
-        <img src="/assets/helen_m.png" alt="Background estático móvel" className="background-image" />
+        <img src="/assets/helen_m.png" alt="Helen Ailith" className="background-image" />
         <div className="background-vignette" />
       </div>
 
       {isVideoLoading && (
         <div className="video-loading-indicator">
           <div className="loading-content">
-            <div className="loading-text">CARREGANDO</div>
+            <div className="loading-text">LOADING</div>
             <div className="loading-progress">
               <div
                 className="loading-progress-bar"
@@ -94,7 +94,7 @@ export default function Home() {
         <nav className="masthead-nav">
           <a href="/songs" className="nav-link nav-link-primary">
             <span className="nav-dot" aria-hidden="true" />
-            Ouvir álbum
+            Listen
           </a>
           <a
             href="https://gemini.google.com/gem/1MRTQclEeZXngER33gLM7vJXqxkDiIE3d?usp=sharing"
@@ -102,7 +102,7 @@ export default function Home() {
             target="_blank"
             rel="noreferrer"
           >
-            Conversar
+            Chat
           </a>
           <a
             href="https://inhabitants.zone/"
@@ -110,7 +110,7 @@ export default function Home() {
             target="_blank"
             rel="noreferrer"
           >
-            Quadrinho
+            Comic
           </a>
           <a
             href="https://www.behance.net/gallery/221593177/Helen-AI-Brand-Humanizada-Autonoma"
@@ -118,7 +118,7 @@ export default function Home() {
             target="_blank"
             rel="noreferrer"
           >
-            Portfólio
+            Portfolio
           </a>
         </nav>
       </header>
@@ -133,8 +133,8 @@ export default function Home() {
         type="button"
         className="volume-button"
         onClick={toggleMute}
-        aria-label={isMuted ? 'Ativar som' : 'Desativar som'}
-        title={isMuted ? 'Ativar som' : 'Desativar som'}
+        aria-label={isMuted ? 'Turn sound on' : 'Turn sound off'}
+        title={isMuted ? 'Turn sound on' : 'Turn sound off'}
       >
         <span className="volume-glyph" aria-hidden="true">
           {isMuted ? (
@@ -151,10 +151,10 @@ export default function Home() {
             </svg>
           )}
         </span>
-        <span className="volume-label">{isMuted ? 'Som desligado' : 'Som ligado'}</span>
+        <span className="volume-label">{isMuted ? 'Sound off' : 'Sound on'}</span>
       </button>
 
-      <nav className="side-links" aria-label="Redes sociais">
+      <nav className="side-links" aria-label="Social">
         <a href="https://www.instagram.com/helenai.wtf/" className="side-link" title="Instagram" target="_blank" rel="noreferrer">
           <img src="/assets/instagram.png" alt="Instagram" className="icon-image" />
           <span className="side-link-label">Instagram</span>
@@ -181,16 +181,16 @@ export default function Home() {
               className="spotify-link"
               target="_blank"
               rel="noreferrer"
-              title="Abrir no Spotify"
+              title="Open in Spotify"
             >
-              Abrir no Spotify ↗
+              Open in Spotify ↗
             </a>
             <button
               type="button"
               className="spotify-toggle"
               onClick={toggleSpotify}
-              aria-label={isSpotifyExpanded ? 'Recolher player' : 'Expandir player'}
-              title={isSpotifyExpanded ? 'Recolher' : 'Expandir'}
+              aria-label={isSpotifyExpanded ? 'Collapse player' : 'Expand player'}
+              title={isSpotifyExpanded ? 'Collapse' : 'Expand'}
             >
               {isSpotifyExpanded ? '–' : '+'}
             </button>
@@ -199,7 +199,7 @@ export default function Home() {
 
         <div className="spotify-content">
           <iframe
-            src="https://open.spotify.com/embed/album/2rIgJTXSOEt1fcC5pr7lWO?utm_source=generator&theme=0"
+            src="https://open.spotify.com/embed/album/0bPQ1xvw1wkKUZKE2x5PAX?utm_source=generator&theme=0"
             width="100%"
             height={isSpotifyExpanded ? '380' : '80'}
             frameBorder="0"
