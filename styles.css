@@ -76,6 +76,13 @@ a {
 @media (max-width: 768px) {
     .background-video { display: none; }
     .background-image { display: block; }
+
+    /* Static image is lighter than the video — reinforce contrast. */
+    .background-vignette {
+        background:
+            radial-gradient(ellipse at center, rgba(15, 15, 16, 0.15) 0%, rgba(15, 15, 16, 0.55) 70%, rgba(15, 15, 16, 0.8) 100%),
+            linear-gradient(180deg, rgba(15, 15, 16, 0.75) 0%, rgba(15, 15, 16, 0.25) 22%, rgba(15, 15, 16, 0.25) 70%, rgba(15, 15, 16, 0.85) 100%);
+    }
 }
 
 /* ------------------------------------------------------------------
@@ -530,6 +537,20 @@ main { position: relative; }
         flex-direction: column;
         align-items: stretch;
         gap: 14px;
+        text-shadow: 0 1px 12px rgba(15, 15, 16, 0.7);
+    }
+
+    .masthead::before {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(180deg, rgba(15, 15, 16, 0.55) 0%, rgba(15, 15, 16, 0) 100%);
+        z-index: -1;
+        pointer-events: none;
+    }
+
+    .powered-by {
+        text-shadow: 0 1px 10px rgba(15, 15, 16, 0.75);
     }
 
     .masthead::after {
@@ -582,6 +603,9 @@ main { position: relative; }
         padding: 6px 10px;
         gap: 8px;
         border: 1px solid var(--line);
+        background: rgba(15, 15, 16, 0.55);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
     }
 
     .side-link-label {
