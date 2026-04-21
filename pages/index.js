@@ -76,6 +76,7 @@ export default function Home() {
           loop
           playsInline
           preload="auto"
+          poster="/assets/helen_m.png"
           className="background-video"
           id="background-video"
         >

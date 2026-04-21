@@ -49,18 +49,21 @@ a {
     background: var(--ink);
 }
 
-.background-video {
-    display: block;
+.background-video,
+.background-image {
+    position: absolute;
+    inset: 0;
     width: 100%;
     height: 100%;
     object-fit: cover;
 }
 
 .background-image {
-    display: none;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
+    z-index: 0;
+}
+
+.background-video {
+    z-index: 1;
 }
 
 .background-vignette {
@@ -74,10 +77,8 @@ a {
 }
 
 @media (max-width: 768px) {
-    .background-video { display: none; }
-    .background-image { display: block; }
-
-    /* Static image is lighter than the video — reinforce contrast. */
+    /* On mobile the video may not play — keep the static image visible
+       beneath as a fallback poster. The video stays on top when playing. */
     .background-vignette {
         background:
             radial-gradient(ellipse at center, rgba(15, 15, 16, 0.15) 0%, rgba(15, 15, 16, 0.55) 70%, rgba(15, 15, 16, 0.8) 100%),
