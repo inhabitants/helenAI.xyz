@@ -97,7 +97,7 @@ export default function Home() {
             Listen
           </a>
           <a
-            href="https://gemini.google.com/gem/1MRTQclEeZXngER33gLM7vJXqxkDiIE3d?usp=sharing"
+            href="https://spicychat.ai/chat/5b4e8ad6-bb7c-415e-a34e-0504772b73ae?ref=ztk3ytm&tap_s=9500614-ab6a78&tm_MatchAI=now"
             className="nav-link"
             target="_blank"
             rel="noreferrer"
